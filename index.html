@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Atlas poético</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: a quiet title page that opens onto one atlas per poet. */
+:root { --bg: #f4f5fa; --surface: #fcfcfe; --ink: #11152b; --ink-2: #474c66; --muted: #80849c; --line: #dde0ec; --azul: #2346c2;
+  --display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif; --text: "Inter", system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) { :root { --bg: #0b0f1f; --surface: #121831; --ink: #eef0f9; --ink-2: #b6bbd3; --muted: #7e839e; --line: #252c4b; --azul: #7d95ff; color-scheme: dark; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--text); font-size: 15px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 860px; margin: 0 auto; padding-block: 72px 48px; display: grid; gap: 28px; }
+h1 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(52px, 10vw, 104px); line-height: .9; }
+h1 em { color: var(--azul); }
+.lede { margin: 0; font-size: 18px; color: var(--ink-2); max-width: 56ch; }
+.authors { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.author { display: grid; gap: 6px; padding: 20px 22px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line);
+  color: var(--ink); text-decoration: none; transition: border-color .15s; }
+.author:hover { border-color: var(--azul); }
+.author strong { font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.05; }
+.author span { color: var(--ink-2); font-size: 14px; }
+.author .dates { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+footer { font-size: 12.5px; color: var(--muted); }
+footer a { color: var(--azul); }
+a:focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; border-radius: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Atlas<br><em>poético</em></h1>
+  <p class="lede">La obra de grandes poetas, leída con estadística: las palabras que usan, cómo miden y riman el verso, su imaginario y su estilo.</p>
+  <div class="authors">
+      <a class="author" href="dario/"><span class="dates">1867–1916</span><strong>Rubén Darío</strong><span>Sus 366 poemas y prosas: palabras, métrica, imaginario y estilo.</span></a>
+  </div>
+  <footer>Textos de los autores en dominio público. Análisis, datos derivados y diseño: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es">CC BY-NC-ND 4.0</a>.</footer>
+</main>
+</body>
+</html>

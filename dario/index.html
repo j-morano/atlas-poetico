@@ -1,0 +1,1743 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Atlas de Rubén Darío</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column; an ultramarine-and-gold atlas, section by section, with the word explorer first. */
+:root {
+  --bg: #f4f5fa;
+  --surface: #fcfcfe;
+  --ink: #11152b;
+  --ink-2: #474c66;
+  --muted: #80849c;
+  --line: #dde0ec;
+  --azul: #2346c2;
+  --azul-soft: #e3e8fb;
+  --oro: #9a6c12;
+  --oro-wash: #f6e7c2;
+  --heat-lo: #f1f3fb;
+  --heat-hi: #12307f;
+  --heat-ink: #ffffff;
+  --tip-bg: #11152b;
+  --tip-ink: #f4f5fa;
+  --c1: #2a78d6; --c2: #eb6834; --c3: #1baf7a; --c4: #eda100; --c5: #e87ba4; --c7: #6250d6; --c-none: #c9c8bf;
+  --on-c: #ffffff; --on-c4: #0b0b0b; --on-none: #11152b;
+  --display: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --text: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --measure: 1080px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0f1f; --surface: #121831; --ink: #eef0f9; --ink-2: #b6bbd3; --muted: #7e839e;
+    --line: #252c4b; --azul: #7d95ff; --azul-soft: #1c2550; --oro: #e2b552; --oro-wash: #3d3116;
+    --heat-lo: #161d3a; --heat-hi: #9fb4ff; --heat-ink: #0b0f1f; --tip-bg: #eef0f9; --tip-ink: #0b0f1f;
+    --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c7: #9085e9; --c-none: #45475a; --on-none: #eef0f9;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b0f1f; --surface: #121831; --ink: #eef0f9; --ink-2: #b6bbd3; --muted: #7e839e;
+  --line: #252c4b; --azul: #7d95ff; --azul-soft: #1c2550; --oro: #e2b552; --oro-wash: #3d3116;
+  --heat-lo: #161d3a; --heat-hi: #9fb4ff; --heat-ink: #0b0f1f; --tip-bg: #eef0f9; --tip-ink: #0b0f1f;
+    --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c7: #9085e9; --c-none: #45475a; --on-none: #eef0f9;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--text);
+  font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--bg);
+}
+.wrap { max-width: var(--measure); margin: 0 auto; }
+h1, h2 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(30px, 4vw, 40px); line-height: 1.05; }
+p { margin: 0; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; border-radius: 4px; }
+.num { font-variant-numeric: tabular-nums; }
+.eyebrow {
+  font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600;
+}
+
+/* Hero */
+.hero { padding-block: 56px 36px; display: grid; gap: 18px; }
+.hero h1 { font-size: clamp(48px, 8.5vw, 96px); line-height: .92; letter-spacing: -.01em; }
+.hero h1 em { color: var(--azul); font-style: italic; }
+.lede { font-size: 18px; color: var(--ink-2); max-width: 60ch; }
+.epigraph {
+  font-family: var(--display); font-style: italic; font-size: 21px; color: var(--ink-2);
+  border-left: 2px solid var(--oro); padding-left: 14px; max-width: 46ch;
+}
+.epigraph small { display: block; font-family: var(--text); font-style: normal; font-size: 12px; color: var(--muted); margin-top: 4px; }
+.stats { display: flex; flex-wrap: wrap; gap: 12px 40px; margin-top: 10px; }
+.stat b { display: block; font-family: var(--display); font-size: 40px; font-weight: 600; line-height: 1; }
+.stat span { font-size: 13px; color: var(--muted); }
+
+/* Section nav */
+nav.toc {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  border-bottom: 1px solid var(--line); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+}
+nav.toc .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 8px; }
+nav.toc a {
+  color: var(--ink-2); text-decoration: none; font-size: 13.5px; font-weight: 500;
+  padding: 6px 12px; border-radius: 999px; white-space: nowrap;
+}
+nav.toc a:hover { background: var(--azul-soft); color: var(--ink); }
+
+section { padding-block: 56px 8px; scroll-margin-top: 56px; display: grid; gap: 20px; }
+.sec-head { display: grid; gap: 8px; max-width: 70ch; }
+.sec-head p { color: var(--ink-2); }
+
+section > *, .sub > *, .hero > * { min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; min-width: 0; }
+
+/* Explorer */
+.search { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.search input {
+  flex: 1 1 280px; min-width: 0; font-family: var(--display); font-size: 30px; font-style: italic;
+  padding: 6px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+}
+.search input:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px var(--azul-soft); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+  padding: 4px 12px; font-size: 13px; cursor: pointer; color: var(--ink-2);
+}
+.chip:hover { border-color: var(--azul); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: var(--surface); }
+.try { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+.word-summary { display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: baseline; }
+.word-summary .big { font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1; }
+.word-summary .meta { color: var(--ink-2); font-size: 14px; }
+.forms { font-size: 13px; color: var(--muted); }
+.forms b { color: var(--ink-2); font-weight: 500; }
+
+/* Column chart (HTML) */
+.cols { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; align-items: end; height: 220px; margin-top: 18px; }
+.col { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; cursor: pointer; position: relative; }
+.col .v { font-size: 11.5px; color: var(--ink-2); margin-bottom: 4px; }
+.col .bar { width: min(100%, 44px); background: var(--azul); border-radius: 4px 4px 0 0; min-height: 0; transition: height .35s ease; }
+.col.zero .bar { background: var(--line); height: 2px !important; border-radius: 1px; }
+.col:hover .bar { filter: brightness(1.12); }
+.cols.filtered .col:not(.on) .bar { opacity: .3; }
+.col-labels { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; border-top: 1px solid var(--line); padding-top: 8px; }
+.col-labels div { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.25; overflow-wrap: anywhere; }
+.col-labels b { display: block; color: var(--ink-2); font-weight: 600; }
+.note { font-size: 12.5px; color: var(--muted); }
+
+/* Concordance */
+.conc-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline; margin-top: 8px; }
+.conc-head h3 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 600; }
+.conc { list-style: none; margin: 0; padding: 0; display: grid; }
+.conc li { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 4px 18px; padding: 9px 0; border-top: 1px solid var(--line); }
+.conc .verse { font-family: var(--display); font-size: 20px; line-height: 1.35; min-width: 0; overflow-wrap: anywhere; }
+.conc mark { background: var(--oro-wash); color: var(--ink); padding: 0 3px; border-radius: 3px; box-shadow: inset 0 -2px 0 var(--oro); }
+.conc .src { font-size: 12px; color: var(--muted); line-height: 1.35; padding-top: 4px; }
+.conc .src i { color: var(--ink-2); font-style: normal; display: block; }
+.more { justify-self: start; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 7px 16px; cursor: pointer; font-size: 13.5px; }
+.more:hover { border-color: var(--azul); }
+
+/* Horizontal bars */
+.hbars { display: grid; gap: 3px; }
+.hb { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 10px; align-items: center; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
+.hb:hover { background: var(--azul-soft); }
+.hb .w { text-align: right; font-family: var(--display); font-size: 19px; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hb .track { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.hb .fill { height: 14px; background: var(--azul); border-radius: 0 4px 4px 0; }
+.hb .n { font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Heatmap */
+.heat-scroll { overflow-x: auto; }
+table.heat { border-collapse: separate; border-spacing: 3px; min-width: 760px; width: 100%; table-layout: fixed; }
+.heat col.lab { width: 104px; }
+.heat col.del { width: 28px; }
+.heat th { font-weight: 500; font-size: 11px; color: var(--muted); vertical-align: bottom; line-height: 1.25; padding: 0 2px 6px; }
+.heat th b { display: block; color: var(--ink-2); font-weight: 600; }
+.heat th.row { text-align: right; font-family: var(--display); font-size: 19px; color: var(--ink); font-weight: 500; padding-right: 10px; cursor: pointer; white-space: nowrap; }
+.heat th.row:hover { color: var(--azul); }
+.heat td {
+  --t: 0; height: 34px; text-align: center; font-size: 12px; border-radius: 4px;
+  background: color-mix(in oklab, var(--heat-hi) calc(var(--t) * 100%), var(--heat-lo));
+  color: var(--ink-2); cursor: default;
+}
+.heat td.dark { color: var(--heat-ink); }
+.heat td.none { color: var(--muted); }
+.heat td:hover { outline: 2px solid var(--oro); outline-offset: -1px; }
+.heat .x { cursor: pointer; color: var(--muted); border: 0; background: none; padding: 0 4px; font-size: 14px; }
+.heat .x:hover { color: var(--ink); }
+.add { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.add input { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; min-width: 0; width: 220px; }
+.legend { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
+.legend .ramp { width: 160px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, var(--heat-lo), var(--heat-hi)); border: 1px solid var(--line); }
+
+/* Zipf */
+.zipf svg { width: 100%; height: auto; display: block; overflow: visible; }
+.zipf text { font-family: var(--text); fill: var(--muted); font-size: 11px; }
+.zipf .lab { fill: var(--ink); font-size: 12.5px; font-weight: 600; }
+.zipf .lab.fn { fill: var(--muted); font-weight: 400; }
+
+/* Tooltip */
+.tip {
+  position: fixed; z-index: 20; pointer-events: none; background: var(--tip-bg); color: var(--tip-ink);
+  font-size: 12.5px; line-height: 1.4; padding: 8px 11px; border-radius: 8px; max-width: 260px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.18); opacity: 0; transition: opacity .12s;
+}
+.tip.show { opacity: 1; }
+.tip b { font-weight: 600; }
+
+footer { padding-block: 64px 48px; color: var(--muted); font-size: 13px; display: grid; gap: 10px; max-width: 75ch; }
+footer h3 { margin: 0; font-family: var(--display); font-size: 22px; color: var(--ink-2); font-weight: 600; }
+
+.loading { color: var(--muted); font-style: italic; font-family: var(--display); font-size: 20px; }
+
+
+/* Métrica */
+.sub { display: grid; gap: 14px; padding-top: 12px; }
+.sub h3 { margin: 0; font-family: var(--display); font-size: 26px; font-weight: 600; }
+.sub > p { color: var(--ink-2); max-width: 70ch; }
+.heat.meter th.row { font-family: var(--text); font-size: 13px; white-space: normal; line-height: 1.25; cursor: default; }
+.heat.meter th.row:hover { color: var(--ink); }
+.heat.meter th.row small { display: block; color: var(--muted); font-size: 11px; }
+.heat.meter col.lab { width: 190px; }
+.stress-wrap { display: grid; gap: 6px; }
+.stress-cols { display: grid; gap: 6px; align-items: end; height: 190px; }
+.stress-cols .col { cursor: default; }
+.stress-cols .bar.weak { background: var(--azul-soft); box-shadow: inset 0 0 0 1px var(--line); }
+.stress-cols .cesura { border-left: 1.5px solid var(--muted); }
+.stress-labels { display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 6px; }
+.stress-labels div { text-align: center; font-size: 11.5px; color: var(--muted); }
+.stacks { display: grid; gap: 8px; }
+.stack { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 12px; align-items: center; }
+.stack .lab { text-align: right; font-size: 13px; color: var(--ink); line-height: 1.25; }
+.stack .lab small { color: var(--muted); }
+.stack .bar { display: flex; height: 26px; gap: 2px; min-width: 0; }
+.stack .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11.5px;
+  color: var(--on-c); overflow: hidden; white-space: nowrap; min-width: 0; }
+.stack .seg:first-child { border-radius: 4px 0 0 4px; }
+.stack .seg:last-child { border-radius: 0 4px 4px 0; }
+.stack .seg:hover { filter: brightness(1.1); }
+.keys { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); }
+.keys span { display: inline-flex; align-items: center; gap: 6px; }
+.keys i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.picker { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.picker select { font: inherit; font-size: 15px; padding: 7px 12px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); max-width: 100%; min-width: 0; }
+.scan-meta { font-size: 13.5px; color: var(--ink-2); }
+.scan { list-style: none; margin: 0; padding: 0; display: grid; }
+.scan li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto 26px; gap: 4px 14px; align-items: center;
+  padding: 5px 6px; border-radius: 6px; }
+.scan li.gap { margin-top: 12px; }
+.scan li.hl { background: var(--oro-wash); }
+.scan .syl { font-size: 13px; font-weight: 600; color: var(--azul); text-align: right; }
+.scan .txt { font-family: var(--display); font-size: 19px; line-height: 1.3; min-width: 0; overflow-wrap: anywhere; }
+.scan .dots { display: flex; gap: 3px; }
+.scan .dots b { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--muted); display: block; }
+.scan .dots b.on { background: var(--azul); border-color: var(--azul); }
+.scan .rh { font-family: var(--display); font-style: italic; font-size: 18px; color: var(--oro); text-align: center; }
+.scan .rh.c { font-weight: 600; }
+.scan .rh.a { opacity: .75; }
+
+/* Paleta */
+.palette { display: grid; gap: 10px; }
+.prow { display: grid; grid-template-columns: 230px minmax(0, 1fr) 92px; gap: 12px; align-items: center; }
+.prow .lab { text-align: right; font-size: 13px; line-height: 1.25; }
+.prow.all .lab { font-family: var(--display); font-size: 22px; font-weight: 600; }
+.prow .strip { display: flex; gap: 2px; height: 30px; min-width: 0; }
+.prow.all .strip { height: 44px; }
+.prow .sw { height: 100%; min-width: 0; display: flex; align-items: center; justify-content: center; font-size: 11.5px;
+  overflow: hidden; white-space: nowrap; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(127,127,127,.5); }
+.prow .sw.nolab { color: transparent !important; }
+.prow .sw:first-child { border-radius: 5px 0 0 5px; }
+.prow .sw:last-child { border-radius: 0 5px 5px 0; }
+.prow .sw:hover { outline: 2px solid var(--ink); outline-offset: -2px; }
+.prow .tot { font-size: 12px; color: var(--muted); }
+.jewels { display: grid; gap: 4px; }
+.jw { display: grid; grid-template-columns: 110px 22px minmax(0, 1fr); gap: 10px; align-items: center; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
+.jw:hover { background: var(--azul-soft); }
+.jw .w { text-align: right; font-family: var(--display); font-size: 19px; }
+.jw .dot { width: 18px; height: 18px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(127,127,127,.45); }
+.jw .track { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.jw .fill { height: 12px; background: var(--azul); border-radius: 0 4px 4px 0; }
+.jw .n { font-size: 12px; color: var(--ink-2); }
+
+/* Rarezas */
+.rare-plot svg { width: 100%; height: auto; display: block; }
+.rare-plot text { font-family: var(--text); fill: var(--muted); font-size: 11px; }
+.rare-plot .pt { fill: var(--c-none); }
+.rare-plot .pt.top { fill: var(--c1); }
+.rare-plot .pt.abs { fill: var(--c2); }
+.rare-plot .lbl { fill: var(--ink); font-size: 12px; }
+.rare-books { display: grid; gap: 14px; }
+.rb { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 6px 14px; align-items: start; }
+.rb .lab { text-align: right; font-size: 13px; line-height: 1.3; }
+.rb .lab b { display: block; font-family: var(--display); font-size: 22px; font-weight: 600; color: var(--azul); }
+.rb .ws { display: flex; flex-wrap: wrap; gap: 4px 6px; min-width: 0; }
+.rb .ws button { font-family: var(--display); font-size: 17px; font-style: italic; border: 0; background: none;
+  padding: 1px 4px; border-radius: 4px; cursor: pointer; color: var(--ink); }
+.rb .ws button:hover { background: var(--oro-wash); }
+.rb .ws button small { font-family: var(--text); font-style: normal; font-size: 10.5px; color: var(--muted); margin-left: 2px; }
+.rb .ws button.abs { color: var(--c2); }
+
+/* Referencias */
+.net, .map { overflow-x: auto; }
+.net svg, .map svg { width: 100%; height: auto; display: block; }
+.net line { stroke: var(--line); }
+.net line.on { stroke: var(--oro); stroke-width: 2; }
+.net circle, .map circle { stroke: var(--surface); stroke-width: 1.5; cursor: pointer; }
+.net text { font-family: var(--text); font-size: 11.5px; fill: var(--ink); pointer-events: none; }
+.net g.dim { opacity: .18; }
+.net line.dim { opacity: .15; }
+.map .land { fill: var(--line); stroke: none; }
+.map text { font-family: var(--text); font-size: 11px; fill: var(--ink); pointer-events: none; }
+.map circle { fill: var(--c5); fill-opacity: .8; }
+.map circle:hover { fill-opacity: 1; stroke: var(--ink); }
+
+/* Mapa semántico */
+.sem-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; }
+.sem svg { width: 100%; height: auto; display: block; }
+.sem .pt { stroke: var(--surface); stroke-width: 1; cursor: pointer; transition: opacity .15s; }
+.sem .pt.dim { opacity: .12; }
+.sem .pt.sel { stroke: var(--ink); stroke-width: 2.5; }
+.sem text.cl { font-family: var(--text); font-weight: 600; font-size: 13px; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; pointer-events: none; }
+.sem-side { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.sem-side h4 { margin: 0; font-family: var(--display); font-size: 22px; font-weight: 600; line-height: 1.15; }
+.sem-side .meta { font-size: 12.5px; color: var(--muted); }
+.sem-side .first { font-family: var(--display); font-style: italic; font-size: 17px; color: var(--ink-2); }
+.sem-side ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 13.5px; }
+.sem-side ol button { font: inherit; border: 0; background: none; color: var(--azul); cursor: pointer; padding: 0; text-align: left; }
+.sem-side ol small { color: var(--muted); }
+.sem-side .act { justify-self: start; }
+#sem-books { font: inherit; font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); max-width: 100%; }
+
+/* Estilo */
+.heat.delta td { height: 40px; }
+.heat.delta th.row { font-family: var(--text); font-size: 13px; cursor: default; white-space: normal; line-height: 1.25; }
+.heat.delta th.row.post, .heat.delta th .post { color: var(--c2); }
+.heat.delta col.lab { width: 200px; }
+.mattr { display: grid; gap: 6px; }
+.mt { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 12px; align-items: center; font-size: 13px; }
+.mt .lab { text-align: right; }
+.mt .lab.post { color: var(--c2); }
+.mt .track { position: relative; height: 18px; border-left: 1px solid var(--line); }
+.mt .dot { position: absolute; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--c1); transform: translateX(-6px); }
+.mt .dot.post { background: var(--c2); }
+.mt .stem { position: absolute; top: 8px; left: 0; height: 2px; background: var(--line); }
+.mt .v { position: absolute; top: 0; font-size: 12px; color: var(--ink-2); margin-left: 10px; }
+.callout { border-left: 3px solid var(--oro); background: var(--oro-wash); padding: 12px 16px; border-radius: 0 10px 10px 0; color: var(--ink); max-width: 75ch; }
+
+.then-now { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.then-now h4 { margin: 0 0 6px; font-size: 13px; color: var(--ink-2); font-weight: 600; }
+.then-now ol { margin: 0; padding-left: 20px; display: grid; gap: 3px; }
+.then-now li { font-size: 13.5px; }
+.then-now button { font-family: var(--display); font-size: 17px; font-style: italic; border: 0; background: none; color: var(--ink); cursor: pointer; padding: 0; }
+.then-now button:hover { color: var(--azul); }
+.then-now small { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- app shell: sidebar on wide screens, top bar + sheet on phones ---------- */
+[hidden] { display: none !important; }
+nav.toc { display: none; }
+.app { display: grid; grid-template-columns: 1fr; min-height: 100dvh; }
+.side { display: none; }
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  padding-block: 10px;
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+}
+.brand { text-decoration: none; color: var(--ink); display: inline-flex; align-items: baseline; gap: 6px; }
+.brand-kicker { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.brand-name { font-family: var(--display); font-style: italic; font-weight: 600; font-size: 24px; color: var(--azul); line-height: 1; }
+.menu-btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink);
+  font-size: 14px; font-weight: 500; cursor: pointer;
+}
+.menu-btn[aria-expanded="true"] { background: var(--azul); border-color: var(--azul); color: var(--surface); }
+.sheet {
+  position: fixed; inset: calc(env(safe-area-inset-top, 0px) + 61px) 0 0 0; z-index: 19;
+  background: var(--bg); overflow-y: auto;
+  padding: 8px max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.menu { display: grid; gap: 18px; }
+.menu-group { display: grid; gap: 2px; }
+.menu-group h4 { margin: 0 0 4px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.menu a {
+  display: block; padding: 9px 12px; border-radius: 10px; color: var(--ink-2); text-decoration: none;
+  font-size: 15px; line-height: 1.25;
+}
+.menu a:hover { background: var(--azul-soft); color: var(--ink); }
+.menu a[aria-current="page"] { background: var(--azul); color: var(--surface); font-weight: 600; }
+.menu a small { display: block; font-size: 12px; color: inherit; opacity: .75; margin-top: 2px; }
+.content { min-width: 0; padding-block: 8px 48px; }
+.content > .view { max-width: 1000px; margin: 0 auto; }
+section.view { padding-block: 28px 8px; }
+.view > .sec-head h2:focus { outline: none; }
+
+/* home */
+#inicio .hero { padding-block: 28px 8px; }
+.cards { display: grid; gap: 28px; padding-top: 24px; }
+.card-group { display: grid; gap: 10px; }
+.card-group h3 { margin: 0; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; font-family: var(--text); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 10px; }
+.card {
+  display: grid; gap: 6px; align-content: start; padding: 16px 18px; border-radius: 14px;
+  background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--ink);
+  transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--azul); transform: translateY(-1px); }
+.card strong { font-family: var(--display); font-size: 22px; font-weight: 600; line-height: 1.1; }
+.card span { font-size: 13.5px; color: var(--ink-2); line-height: 1.45; }
+
+/* sub-tabs inside a view */
+.subtabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.subtabs button {
+  flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
+  border-radius: 999px; padding: 7px 14px; font-size: 13.5px; cursor: pointer; min-height: 36px;
+}
+.subtabs button:hover { border-color: var(--azul); color: var(--ink); }
+.subtabs button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.view.tabbed .sub > h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.view.tabbed .sub { padding-top: 4px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); }
+.pager a { display: grid; gap: 2px; text-decoration: none; color: var(--ink); max-width: 48%; }
+.pager a small { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.pager a span { font-family: var(--display); font-size: 20px; font-weight: 600; }
+.pager a:hover span { color: var(--azul); }
+.pager .next { text-align: right; margin-left: auto; }
+.method-link { font-size: 13px; color: var(--muted); }
+.method-link a { color: var(--azul); }
+
+details.howto { margin-top: 2px; }
+details.howto summary { cursor: pointer; color: var(--azul); font-size: 13.5px; font-weight: 500; list-style: none; display: inline-flex; align-items: center; gap: 6px; min-height: 32px; }
+details.howto summary::-webkit-details-marker { display: none; }
+details.howto summary::before { content: "+"; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid currentColor; font-size: 13px; line-height: 1; }
+details.howto[open] summary::before { content: "−"; }
+details.howto p { margin-top: 6px; color: var(--ink-2); }
+.method .prose h3.lic-h { margin: 18px 0 0; font-family: var(--display); font-size: 24px; font-weight: 600; color: var(--ink); }
+.method .prose a, .home-lic a { color: var(--azul); }
+.home-lic { margin-top: 32px; font-size: 12.5px; color: var(--muted); }
+.method .prose { display: grid; gap: 12px; max-width: 70ch; color: var(--ink-2); font-size: 15px; }
+
+@media (min-width: 960px) {
+  .app { grid-template-columns: 250px minmax(0, 1fr); column-gap: 40px; }
+  .topbar, .sheet { display: none !important; }
+  .side {
+    display: flex; flex-direction: column; gap: 22px; position: sticky; top: 0; align-self: start;
+    height: 100dvh; overflow-y: auto; padding: 28px 8px 28px 0; border-right: 1px solid var(--line);
+  }
+  .side .brand { padding: 0 12px; flex-direction: column; gap: 2px; }
+  .side .brand-name { font-size: 34px; }
+  .menu a { padding: 7px 12px; font-size: 14.5px; }
+  section.view { padding-block: 40px 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+
+@media (max-width: 640px) {
+  .conc li { grid-template-columns: minmax(0, 1fr); }
+  .hb { grid-template-columns: 92px minmax(0, 1fr); }
+  .panel { padding: 16px; }
+  .cols { height: 180px; gap: 3px; }
+  .col-labels { gap: 3px; }
+  .col-labels div span { display: none; }
+  .col .v { font-size: 10px; }
+  .stack { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .stack .lab { text-align: left; }
+  .scan li { grid-template-columns: 28px minmax(0, 1fr) 22px; }
+  .scan .dots { grid-column: 2; grid-row: 2; }
+  .stress-labels div { font-size: 10px; }
+  .prow { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .prow .lab { text-align: left; }
+  .rb { grid-template-columns: minmax(0, 1fr); }
+  .rb .lab { text-align: left; }
+  .sem-wrap { grid-template-columns: minmax(0, 1fr); }
+  .net svg { min-width: 680px; }
+  .map svg { min-width: 640px; }
+  .mt { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .mt .lab { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+.home-back { font-size: 12.5px; color: var(--muted); text-decoration: none; padding: 0 12px; }
+.home-back:hover { color: var(--azul); }
+#sheet .home-back { display: block; padding: 4px 12px 12px; }
+</style>
+
+
+</head>
+<body>
+<div class="app">
+  <aside class="side" aria-label="Menú">
+    <a class="home-back" href="../">← Atlas poético</a>
+    <a class="brand" href="#inicio"><span class="brand-kicker">Atlas de</span> <span class="brand-name">Rubén Darío</span></a>
+    <nav class="menu" id="menu-side" aria-label="Análisis"></nav>
+  </aside>
+
+  <header class="topbar">
+    <a class="brand" href="#inicio"><span class="brand-kicker">Atlas de</span> <span class="brand-name">Rubén Darío</span></a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="sheet">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 4.5h14M2 9h14M2 13.5h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>Menú</span>
+    </button>
+  </header>
+  <div class="sheet" id="sheet" hidden>
+    <a class="home-back" href="../">← Atlas poético</a>
+    <nav class="menu" id="menu-sheet" aria-label="Análisis"></nav>
+  </div>
+
+  <main class="content" id="content">
+  <section id="inicio" class="view">
+  <div class="hero">
+    <div class="eyebrow">Corpus Literatur · 1867–1916</div>
+    <h1>Atlas de<br><em>Rubén Darío</em></h1>
+    <p class="lede">Sus 366 poemas y prosas, leídos con estadística: las palabras que usa, cómo mide y rima el verso, su imaginario y su estilo.</p>
+    <p class="epigraph">Yo persigo una forma que no encuentra mi estilo…<small>Prosas profanas, «Las ánforas de Epicuro»</small></p>
+    <div class="stats" id="stats"><span class="loading">Cargando el corpus…</span></div>
+  </div>
+    <div class="cards" id="cards"></div>
+    <p class="home-lic">Textos de Darío en dominio público. Análisis y diseño con licencia <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>. <a href="#metodo">Fuentes y licencias</a>.</p>
+  </section>
+
+  <section id="explorador" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Palabras · Explorador</div>
+      <h2>Busca una palabra</h2>
+      <p>Mira cuántas veces aparece en cada libro y lee los versos donde aparece. Se incluyen el singular y el plural; para buscar varias formas a la vez, sepáralas con comas.</p>
+    </div>
+    <div class="search">
+      <input id="q" type="search" value="cisne" autocomplete="off" spellcheck="false" aria-label="Palabra" list="sugerencias">
+      <datalist id="sugerencias"></datalist>
+    </div>
+    <div class="try" id="try"><span>Prueba con:</span></div>
+    <div class="panel" id="word-panel">
+      <div class="word-summary" id="word-summary"></div>
+      <div class="cols" id="cols" role="list"></div>
+      <div class="col-labels" id="col-labels"></div>
+      <p class="note" id="cols-note" style="margin-top:10px"></p>
+    </div>
+    <div class="conc-head">
+      <h3 id="conc-title">Concordancia</h3>
+      <span class="note" id="conc-filter"></span>
+    </div>
+    <ul class="conc" id="conc"></ul>
+    <button class="more" id="more" hidden>Mostrar más versos</button>
+  </section>
+
+  <section id="vocabulario" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Palabras · Vocabulario</div>
+      <h2>Luz, alma y oro</h2>
+      <p>Los sustantivos, adjetivos y verbos más frecuentes, agrupados por lema (todas sus formas juntas). Pulsa una palabra para abrirla en el explorador.</p>
+    </div>
+    <div class="tabs" id="pos-tabs" role="tablist"></div>
+    <div class="panel"><div class="hbars" id="pos-bars"></div></div>
+  </section>
+
+  <section id="motivos" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Palabras · Motivos</div>
+      <h2>Los motivos a lo largo de su obra</h2>
+      <p>Frecuencia de cada motivo por cada 10.000 palabras en los diez libros principales, por orden de publicación. Puedes añadir tus propios motivos.</p>
+    </div>
+    <div class="add">
+      <input id="add-motif" type="text" placeholder="Añadir motivo (p. ej. «mar»)" autocomplete="off" spellcheck="false" aria-label="Añadir motivo">
+      <button class="chip" id="add-btn">Añadir</button>
+      <span class="note" id="add-msg"></span>
+    </div>
+    <div class="panel heat-scroll"><table class="heat" id="heat"></table></div>
+    <div class="legend"><span>0</span><span class="ramp"></span><span id="legend-max"></span><span>apariciones por cada 10.000 palabras</span></div>
+  </section>
+
+  <section id="distintivas" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Palabras · Palabras distintivas</div>
+      <h2>Lo que distingue a cada libro</h2>
+      <p>Sustantivos y adjetivos que aparecen en más piezas de un libro que en el resto de la obra. Se cuentan piezas, no apariciones (clave por dispersión, Egbert y Biber 2019), para que un solo poema largo no defina un libro; una palabra debe aparecer al menos en dos piezas del libro. La puntuación es una z: cuanto más alta, más propia del libro.</p>
+    </div>
+    <div class="chips" id="book-chips"></div>
+    <div class="panel"><div class="hbars" id="dist-bars"></div></div>
+  </section>
+
+  <section id="zipf" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Palabras · Ley de Zipf</div>
+      <h2>Unas pocas palabras lo llenan casi todo</h2>
+      <p id="zipf-lede">Cada forma ordenada de la más a la menos frecuente, en escala logarítmica. La línea gris es la ley de Zipf: la palabra en el puesto <i>n</i> aparece 1/<i>n</i> veces lo que la primera. Toca o pasa el cursor por la curva.</p>
+    </div>
+    <div class="panel zipf" id="zipf-panel"></div>
+  </section>
+
+  <section id="metrica" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Verso · Métrica</div>
+      <h2>Medir el verso</h2>
+      <p>Cada verso se ha medido en sílabas métricas, con sinalefas y la regla del acento final (una sílaba más si termina en aguda, una menos si en esdrújula). También se marcan sus acentos y su rima. Los versos compuestos (alejandrinos 7+7, dodecasílabos 6+6) se miden por hemistiquios, como hace un métrico: cada mitad por separado y sin sinalefa en la cesura. La escansión es automática (Rantanplan) y está validada: acierta el número de sílabas en el 99,3 % de una muestra de 2.000 versos de sonetos del Siglo de Oro revisados a mano por especialistas, y en el 98,7 % de 600 versos de poemas isométricos de Darío (97,7 % en los alejandrinos).</p>
+    </div>
+
+    <div class="sub" data-slug="medidas">
+      <h3>Las medidas de cada libro</h3>
+      <p>Porcentaje de versos de cada medida. Se ve el paso del octosílabo tradicional de los primeros libros al alejandrino y el dodecasílabo de <i>Prosas profanas</i>, y el eneasílabo de los últimos.</p>
+      <div class="panel heat-scroll"><table class="heat meter" id="meter-heat"></table></div>
+    </div>
+
+    <div class="sub" data-slug="acentos">
+      <h3>Dónde caen los acentos</h3>
+      <p>Porcentaje de versos con acento en cada sílaba. Los picos son los acentos fijos de cada medida: en el alejandrino, la 6.ª y la 13.ª, uno por hemistiquio.</p>
+      <div class="tabs" id="stress-tabs"></div>
+      <div class="panel stress-wrap">
+        <div class="stress-cols" id="stress-cols"></div>
+        <div class="stress-labels" id="stress-labels"></div>
+        <p class="note" id="stress-note"></p>
+      </div>
+    </div>
+
+    <div class="sub" data-slug="endecasilabos">
+      <h3>Los tipos de endecasílabo</h3>
+      <p>Según sus acentos interiores (clasificación de Navarro Tomás). El dactílico, con acentos en 4.ª y 7.ª, es el endecasílabo «de gaita gallega» que Darío puso de moda: un tercio de los de <i>Prosas profanas</i>. Orden de prioridad: con acento en 6.ª, el tipo lo da el primer acento (1.ª, 2.ª, 3.ª o 4.ª; el de 4.ª y 6.ª se muestra aparte porque las clasificaciones no coinciden); sin acento en 6.ª, sáfico (4.ª y 8.ª) y luego dactílico (4.ª y 7.ª). Solo un 6 % de los versos encaja en dos tipos a la vez.</p>
+      <div class="keys" id="endeca-keys"></div>
+      <div class="panel stacks" id="endeca"></div>
+    </div>
+
+    <div class="sub" data-slug="rima">
+      <h3>La rima</h3>
+      <p>Porcentaje de versos con rima consonante, asonante o sin rima, buscando la rima entre versos cercanos. El tipo se decide verso a verso comparando sus terminaciones tal como suenan en el español de Darío, con seseo: <i>voz</i> y <i>dos</i>, o <i>fugaz</i> y <i>jamás</i>, riman en consonante. La rima consonante pasa de la mitad de los versos en los libros de la década de 1880 a más del 80 % desde <i>Prosas profanas</i>.</p>
+      <div class="keys" id="rhyme-keys"></div>
+      <div class="panel stacks" id="rhyme"></div>
+    </div>
+
+  </section>
+
+  <section id="escansion" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Verso · Escansión</div>
+      <h2>Escansión de un poema</h2>
+    </div>
+      <p>Elige un poema para ver la medida de cada verso, sus acentos (círculos llenos) y la letra de su rima. Toca o pasa el cursor por un verso para resaltar los que riman con él.</p>
+      <div class="picker">
+        <select id="poem" aria-label="Poema"></select>
+        <span class="scan-meta" id="scan-meta"></span>
+      </div>
+      <div class="panel"><ul class="scan" id="scan"></ul></div>
+  </section>
+
+  <section id="paleta" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Imaginario · Paleta</div>
+      <h2>Los colores de Darío</h2>
+      <p>Las palabras de color de cada libro, ordenadas de la más frecuente a la menos; el ancho de cada franja es su proporción. Pulsa un color para leer sus versos en el explorador.</p>
+    </div>
+    <div class="sub" data-slug="colores">
+      <h3>Colores por libro</h3>
+    <div class="panel palette" id="palette"></div>
+    <p class="note">Se cuentan las formas de cada color y sus derivados (dorado, áureo, blancura…). Se excluyen por ambiguas: rosa (casi siempre la flor), alba (el amanecer), celeste (casi siempre «del cielo»), argentino, morada y violeta. Los tonos son ilustrativos.</p>
+    </div>
+    <div class="sub" data-slug="joyero">
+      <h3>El joyero</h3>
+      <p>Materias preciosas y nobles nombradas en toda la obra, con sus derivados (cristalino, marmóreo, diamantino…).</p>
+      <div class="panel jewels" id="jewels"></div>
+    </div>
+  </section>
+
+  <section id="rarezas" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Palabras · Rarezas</div>
+      <h2>Un vocabulario raro y precioso</h2>
+      <p>Cada palabra comparada con su frecuencia en los libros en español de su tiempo, impresos entre 1880 y 1920 (Google Books Ngram, unos 14.500 millones de palabras), en escala Zipf: 7 es «de», 1 es una vez cada cien millones de palabras. Sin nombres propios ni palabras gramaticales. Comparar con el español de hoy engaña: <i>boscaje</i>, <i>beldad</i> o <i>trémulo</i> parecen rarezas modernistas, pero eran lengua poética corriente en la época.</p>
+    </div>
+    <div class="sub" data-slug="su-tiempo">
+      <h3>Darío frente al español de su tiempo</h3>
+      <p>Cada punto es una palabra usada 5 veces o más. Cuanto más arriba y a la izquierda, más la prefiere Darío frente a los libros de su época: nicaragüenses (<i>cegua</i>, <i>pipiles</i>), cultismos y mitología (<i>quirón</i>, <i>siringa</i>, <i>prora</i>), neologismos (<i>blancor</i>, <i>harmoniosa</i>). Toca o pasa el cursor por los puntos; pulsa para abrir la palabra.</p>
+      <div class="keys"><span><i style="background:var(--c1)"></i>las más sobrerrepresentadas</span><span><i style="background:var(--c2)"></i>no encontradas en la referencia</span><span><i style="background:var(--c-none)"></i>resto</span></div>
+      <div class="panel rare-plot" id="rare-plot"></div>
+    </div>
+    <div class="sub" data-slug="indice">
+      <h3>El índice de rareza</h3>
+      <p>Porcentaje de las palabras de contenido de cada libro que eran raras en los libros de su época (Zipf menor que 2,5) o que no aparecen en ellos. Medidos frente a su tiempo, los libros apenas se diferencian: entre un 6 y un 10 %.</p>
+      <div class="keys"><span><i style="background:var(--c1)"></i>rara en su época</span><span><i style="background:var(--c2)"></i>no encontrada</span></div>
+      <div class="panel stacks" id="rare-bars"></div>
+    </div>
+    <div class="sub" data-slug="por-libro">
+      <h3>Las palabras raras de cada libro</h3>
+      <p>Las más repetidas entre las raras de cada libro (en naranja, las que no aparecen en la referencia). El número es cuántas veces aparecen en el libro.</p>
+      <div class="panel rare-books" id="rare-books"></div>
+    </div>
+    <div class="sub" data-slug="entonces-y-ahora">
+      <h3>Entonces y ahora</h3>
+      <p>Las palabras de Darío que más han cambiado de frecuencia entre los libros de 1880–1920 y los de 2000–2019 (la misma fuente, Google Books, para no mezclar libros con lenguaje de internet). Lo que más ha bajado son sobre todo cambios de ortografía (<i>obscuro</i>, <i>harmonía</i>, <i>oir</i>), más unas pocas palabras perdidas (<i>ardimiento</i>, <i>lauros</i>, <i>doquiera</i>).</p>
+      <div class="panel then-now" id="then-now"></div>
+    </div>
+  </section>
+
+  <section id="referencias" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Imaginario · Referencias</div>
+      <h2>El mundo de Darío</h2>
+      <p>Dioses, figuras bíblicas, escritores y artistas, personajes históricos y lugares nombrados en su obra. Lista revisada a mano; las variantes cuentan juntas (Cipris y Citerea son Venus; Lutecia es París). Se excluyen Dios, las abstracciones y los personajes de sus cuentos. Para no dejarse nombres, se pasó además un reconocedor automático de entidades (spaCy) por toda la obra; de sus propuestas se añadieron unas 25 referencias que faltaban (Céfiro, Ulises, Titania, Pierrot, Gautier, Renan, Juan Valera, Santo Domingo…).</p>
+    </div>
+    <div class="sub" data-slug="nombres">
+      <h3>Los nombres</h3>
+    <div class="tabs" id="ref-tabs"></div>
+    <div class="panel"><div class="hbars" id="ref-bars"></div></div>
+    </div>
+    <div class="sub" data-slug="red">
+      <h3>Quién aparece con quién</h3>
+      <p>Se unen dos nombres cuando comparten varios poemas en verso (al menos 2, y al menos el 12 % de los poemas en que aparece alguno de ellos). Toca o pasa el cursor por un nombre para ver sus vecinos; pulsa para abrirlo en el explorador.</p>
+      <div class="keys" id="ref-keys"></div>
+      <div class="panel net" id="net"></div>
+    </div>
+    <div class="sub" data-slug="mapa">
+      <h3>El mapa</h3>
+      <p>Lugares nombrados, con el tamaño según las menciones. Continentes y países se sitúan en un punto central.</p>
+      <div class="panel map" id="map"></div>
+    </div>
+  </section>
+
+  <section id="semantico" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Imaginario · Mapa semántico</div>
+      <h2>La obra como un mapa de temas</h2>
+      <p>Cada punto es una pieza (círculo: verso; cuadrado: prosa). Un modelo de lenguaje (bge-m3) resume el sentido de cada pieza en un vector; las piezas cercanas tratan temas parecidos. Los temas de Darío forman un continuo, no grupos nítidos: las cuatro regiones son la división más fina que se mantiene estable al repetir el análisis. Los puntos huecos son piezas de frontera, que unas veces caen en una región y otras en otra. Los nombres de las regiones se han puesto a mano tras leer sus palabras clave. Pulsa un punto para ver las piezas más parecidas.</p>
+    </div>
+    <div class="picker">
+      <select id="sem-books" aria-label="Resaltar un libro"><option value="">Todos los libros</option></select>
+    </div>
+    <div class="keys" id="sem-keys"></div>
+    <div class="panel sem-wrap">
+      <div class="sem" id="sem"></div>
+      <div class="sem-side" id="sem-side"><p class="note">Pulsa un punto del mapa para ver la pieza y las cinco más parecidas.</p></div>
+    </div>
+  </section>
+
+  <section id="estilo" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Estilo · Estilo</div>
+      <h2>Parentescos de estilo</h2>
+      <p>La estilometría compara textos por la frecuencia de sus palabras más comunes (de, que, el, en, mi…), que reflejan el estilo más que el tema. Aquí se compara el verso de los diez libros, en fragmentos de 2.000 palabras, con la distancia Delta coseno (la variante más fiable según Evert et al., 2017), promediada sobre vocabularios de 100 a 1.000 palabras. Comprobación previa: un fragmento apartado se asigna a su libro correcto en el 71 % de los casos (frente al 21 % por azar). Los libros están ordenados según su agrupamiento.</p>
+    </div>
+    <div class="sub" data-slug="parentescos">
+      <h3>Parentescos entre libros</h3>
+    <div class="panel heat-scroll"><table class="heat delta" id="delta"></table></div>
+    <div class="legend"><span>más parecidos</span><span class="ramp" style="background:linear-gradient(90deg, var(--heat-hi), var(--heat-lo))"></span><span>menos parecidos</span></div>
+    <p class="callout" id="stylo-note"></p>
+    </div>
+    <div class="sub" data-slug="riqueza">
+      <h3>Riqueza de vocabulario</h3>
+      <p>Proporción media de palabras distintas en ventanas de 500 palabras (MATTR), solo verso. A diferencia de la proporción simple, no depende de la longitud del libro.</p>
+      <div class="panel mattr" id="mattr"></div>
+    </div>
+  </section>
+
+  <section id="metodo" class="view method" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Acerca del atlas</div>
+      <h2>Cómo se hizo</h2>
+      <p>Las fuentes, las herramientas y las comprobaciones detrás de cada análisis.</p>
+    </div>
+    <div class="prose">
+    <p>El texto viene de <b>dario/obras/</b> en el repositorio Literatur: 366 piezas, cada una sin su cabecera ni su título. Las palabras se separan con una expresión regular sobre letras del español y se pasan a minúsculas; se mantiene la ortografía de época (á, é, ó, fué).</p>
+    <p>Los lemas y las categorías gramaticales (vocabulario y palabras distintivas) son de spaCy, modelo es_core_news_md, que comete algunos errores con la lengua poética. Las palabras distintivas se calculan por dispersión (Egbert y Biber, 2019): el logaritmo del cociente de probabilidades entre la proporción de piezas del libro que usan la palabra y la del resto, dividido por su error típico.</p>
+    <p>Las rarezas se miden frente a Google Books Ngram (español, versión de 2020): frecuencias de 1880–1920 para la época de Darío y de 2000–2019 para hoy, de la misma fuente. Los libros del siglo XIX se digitalizaron por OCR, así que las palabras muy raras pueden llevar algo de ruido.</p>
+    <p>El mapa semántico usa el modelo BAAI/bge-m3: cada pieza se divide en fragmentos de unas 120 palabras, se promedian sus vectores y se resta la media del corpus (sin ese centrado, las piezas largas quedaban cerca de todo). Se eligió entre tres modelos con una prueba de validez: las series que Darío compuso como unidad (El año lírico, los Medallones, Los cisnes, las Rimas, los Abrojos) deben quedar juntas. bge-m3 las recupera unas 3,5 veces mejor que el azar. Las regiones salen de un agrupamiento de consenso (k-means sobre UMAP en 30 ejecuciones); la confianza de cada pieza es la proporción de ejecuciones en que coincide con su región. La región «Sátira y vida humilde» reúne sobre todo los Abrojos, y su brevedad probablemente pesa tanto como su tema.</p>
+    <p>El contorno del mapa es de Natural Earth (dominio público), vía el paquete world-atlas.</p>
+    <p>La métrica y la rima se han calculado con Rantanplan (proyecto POSTDATA, LINHD-UNED). Antes de medir, las rayas (—) se sustituyen por espacios, porque una raya pegada a dos palabras («princesa,—dice») hacía que se perdieran ambas; las elisiones se escriben enteras (d'ella → de ella, que mide igual por sinalefa), y las dedicatorias impresas al comienzo de un poema no se miden. Los alejandrinos y dodecasílabos se miden por hemistiquios: se prueba cada límite de palabra como cesura y se acepta solo si las dos mitades miden exactamente 7+7 (o 6+6). Validación: 99,3 % de acierto en sílabas (IC 95 %: 98,8–99,6) en 2.000 versos del Corpus de Sonetos del Siglo de Oro revisados a mano (Navarro-Colorado et al., 2016), y 98,7 % (97,4–99,3) en 600 versos de poemas de Darío de metro conocido y uniforme. Se comprueba verso a verso que no falte ninguna palabra: solo quedan 36 versos con alguna sin medir, casi todos en francés. En dos pasajes (12 versos) no pudo analizarse la rima y solo se midió el verso.</p>
+    <p>Los diez libros principales se ordenan por la fecha de su primera edición. <i>Lira póstuma</i> (1919) y <i>Poemas de juventud</i> (1923) son recopilaciones póstumas; <i>Azul</i> es sobre todo prosa.</p>
+      <h3 class="lic-h">Fuentes y licencias</h3>
+      <p><b>Textos de Rubén Darío.</b> De dominio público (Darío murió en 1916). Proceden del corpus <i>Literatur</i>, que los toma de ediciones de época: Project Gutenberg, Wikisource, Internet Archive, Biblioteca Virtual Miguel de Cervantes y Memoria Chilena.</p>
+      <p><b>Frecuencias de época.</b> Google Books Ngram Viewer, corpus en español (versión de 2020), con licencia <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>.</p>
+      <p><b>Mapa.</b> Contorno de Natural Earth, de dominio público. <b>Tipografías.</b> Cormorant Garamond e Inter, de Google Fonts, con licencia SIL Open Font License.</p>
+      <p><b>Herramientas.</b> Rantanplan (Apache 2.0) para la métrica, spaCy y el modelo BAAI/bge-m3 para el lenguaje, wordfreq y networkx; se usaron para calcular, no se distribuyen con esta página. La validación de la métrica usó el Corpus de Sonetos del Siglo de Oro (Navarro-Colorado et al., 2016) solo en local.</p>
+      <p><b>Este atlas.</b> Los análisis, los datos derivados, los textos explicativos y el diseño se publican con licencia <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" target="_blank" rel="noopener">Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional (CC BY-NC-ND 4.0)</a>: se pueden compartir sin cambios, citando la fuente y sin fines comerciales; no se permite distribuir versiones modificadas ni obras derivadas. Los textos de Darío siguen siendo de dominio público.</p>
+    </div>
+  </section>
+  </main>
+</div>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+(function router() {
+  const ROUTES = [
+    { id: "inicio", title: "Inicio", group: null },
+    { id: "explorador", title: "Explorador", group: "Palabras", find: "Busca cualquier palabra: cuántas veces aparece en cada libro y en qué versos." },
+    { id: "vocabulario", title: "Vocabulario", group: "Palabras", find: "Luz, alma y oro encabezan sus sustantivos; divino, sus adjetivos." },
+    { id: "motivos", title: "Motivos", group: "Palabras", find: "El cisne y la princesa culminan en Prosas profanas; Dios y el alma, en Lira póstuma." },
+    { id: "distintivas", title: "Palabras distintivas", group: "Palabras", find: "Las palabras que caracterizan cada libro, contadas por piezas y no por apariciones." },
+    { id: "rarezas", title: "Rarezas", group: "Palabras", find: "Frente a los libros de su tiempo, lo raro es lo nicaragüense, la mitología y los neologismos." },
+    { id: "zipf", title: "Ley de Zipf", group: "Palabras", find: "Más de la mitad de las formas aparece una sola vez." },
+    { id: "metrica", title: "Métrica", group: "Verso", find: "Del octosílabo de Abrojos al alejandrino de Prosas profanas; la rima consonante pasa del 50 al 85 %." },
+    { id: "escansion", title: "Escansión de un poema", group: "Verso", find: "Cada verso medido, con sus acentos y su rima." },
+    { id: "paleta", title: "Paleta", group: "Imaginario", find: "Oro, blanco y azul; el blanco manda en Prosas profanas. Y un joyero de cristal y perlas." },
+    { id: "referencias", title: "Referencias", group: "Imaginario", find: "Venus, Cristo y Víctor Hugo, en red y en un mapa que va del Momotombo a Kioto." },
+    { id: "semantico", title: "Mapa semántico", group: "Imaginario", find: "Cuatro regiones temáticas que forman un continuo." },
+    { id: "estilo", title: "Estilometría", group: "Estilo", find: "Poemas de juventud se parece a los libros tempranos; el estilo ordena los libros en el tiempo." },
+    { id: "metodo", title: "Cómo se hizo", group: "Acerca del atlas", find: "Fuentes, herramientas y validación de cada análisis." },
+  ];
+  const $ = (q, el = document) => el.querySelector(q);
+  const views = new Map([...document.querySelectorAll("section.view")].map(v => [v.id, v]));
+  const order = ROUTES.map(r => r.id).filter(id => views.has(id));
+  const lastSub = {};
+
+  // menus
+  const menuHTML = () => {
+    const groups = [];
+    ROUTES.forEach(r => {
+      if (!r.group) return;
+      let g = groups.find(x => x.name === r.group);
+      if (!g) groups.push(g = { name: r.group, items: [] });
+      g.items.push(r);
+    });
+    return `<a href="#inicio" data-route="inicio">Inicio</a>` + groups.map(g =>
+      `<div class="menu-group"><h4>${g.name}</h4>${g.items.map(r => `<a href="#${r.id}" data-route="${r.id}">${r.title}</a>`).join("")}</div>`).join("");
+  };
+  $("#menu-side").innerHTML = menuHTML();
+  $("#menu-sheet").innerHTML = menuHTML();
+
+  // home cards
+  const groups = [...new Set(ROUTES.filter(r => r.group).map(r => r.group))];
+  $("#cards").innerHTML = groups.map(g => `<div class="card-group"><h3>${g}</h3><div class="card-grid">` +
+    ROUTES.filter(r => r.group === g).map(r => `<a class="card" href="#${r.id}"><strong>${r.title}</strong><span>${r.find}</span></a>`).join("") +
+    `</div></div>`).join("");
+
+  // sub-tabs
+  views.forEach((v, id) => {
+    const subs = [...v.querySelectorAll(":scope > .sub")];
+    if (subs.length < 2) return;
+    v.classList.add("tabbed");
+    subs.forEach(sub => { sub.id = `${id}-${sub.dataset.slug}`; sub.setAttribute("role", "tabpanel"); });
+    const bar = document.createElement("div");
+    bar.className = "subtabs"; bar.setAttribute("role", "tablist");
+    bar.innerHTML = subs.map(sub => `<button role="tab" id="tab-${sub.id}" aria-controls="${sub.id}" data-sub="${sub.id}">${sub.querySelector("h3").textContent}</button>`).join("");
+    subs[0].before(bar);
+    subs.forEach(sub => sub.setAttribute("aria-labelledby", `tab-${sub.id}`));
+    bar.addEventListener("click", e => {
+      const b = e.target.closest("button[data-sub]");
+      if (b) location.replace("#" + b.dataset.sub);
+    });
+    bar.addEventListener("keydown", e => {
+      if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+      const bs = [...bar.querySelectorAll("button")], i = bs.indexOf(document.activeElement);
+      const n = bs[(i + (e.key === "ArrowRight" ? 1 : -1) + bs.length) % bs.length];
+      n.focus(); n.click();
+    });
+  });
+
+  // long explanations: keep the first sentence, fold the rest
+  document.querySelectorAll("section.view:not(#inicio):not(#metodo) .sec-head > p, section.view .sub > p").forEach(p => {
+    if (p.textContent.length < 230) return;
+    const html = p.innerHTML;
+    const m = html.match(/^([\s\S]{60,}?[.:;](?:<\/i>)?)\s+(?=[A-ZÁÉÍÓÚÑ¿¡«<])/);
+    if (!m) return;
+    const rest = html.slice(m[0].length);
+    if (rest.replace(/<[^>]+>/g, "").trim().length < 60) return;
+    p.innerHTML = m[1];
+    const d = document.createElement("details");
+    d.className = "howto";
+    d.innerHTML = `<summary>Cómo se calcula</summary><p>${rest}</p>`;
+    p.after(d);
+  });
+
+  // pager + method link
+  order.forEach((id, i) => {
+    if (id === "inicio") return;
+    const v = views.get(id), prev = ROUTES.find(r => r.id === order[i - 1]), next = ROUTES.find(r => r.id === order[i + 1]);
+    const nav = document.createElement("nav");
+    nav.className = "pager"; nav.setAttribute("aria-label", "Anterior y siguiente");
+    nav.innerHTML = (prev ? `<a class="prev" href="#${prev.id}"><small>← Anterior</small><span>${prev.title}</span></a>` : "") +
+      (next ? `<a class="next" href="#${next.id}"><small>Siguiente →</small><span>${next.title}</span></a>` : "");
+    v.append(nav);
+  });
+
+  const sheet = $("#sheet"), btn = $("#menu-btn");
+  function closeSheet() { sheet.hidden = true; btn.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+  btn.addEventListener("click", () => {
+    const open = sheet.hidden;
+    sheet.hidden = !open; btn.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) (sheet.querySelector('[aria-current="page"]') || sheet.querySelector("a")).focus();
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !sheet.hidden) { closeSheet(); btn.focus(); } });
+  sheet.addEventListener("click", e => { if (e.target.closest("a")) closeSheet(); });
+
+  let current = null;
+  function show() {
+    let h = decodeURIComponent(location.hash.slice(1)) || "inicio";
+    let viewId = h, subId = null;
+    if (!views.has(h)) {
+      const el = document.getElementById(h);
+      const v = el && el.closest("section.view");
+      if (el && el.classList.contains("sub") && v) { viewId = v.id; subId = h; }
+      else viewId = "inicio";
+    }
+    const v = views.get(viewId);
+    const changed = current !== viewId;
+    views.forEach((el, id) => { el.hidden = id !== viewId; });
+    if (v.classList.contains("tabbed")) {
+      const subs = [...v.querySelectorAll(":scope > .sub")];
+      subId = subId || lastSub[viewId] || subs[0].id;
+      lastSub[viewId] = subId;
+      subs.forEach(sub => { sub.hidden = sub.id !== subId; });
+      v.querySelectorAll(".subtabs button").forEach(b => {
+        const on = b.dataset.sub === subId;
+        b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1;
+        if (on) b.scrollIntoView({ block: "nearest", inline: "nearest" });
+      });
+    }
+    document.querySelectorAll(".menu a").forEach(a => {
+      if (a.dataset.route === viewId) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    const r = ROUTES.find(x => x.id === viewId);
+    document.title = viewId === "inicio" ? "Atlas de Rubén Darío" : `${r.title} · Atlas de Rubén Darío`;
+    if (changed) {
+      window.scrollTo(0, 0);
+      const h2 = v.querySelector(".sec-head h2, h1");
+      if (current !== null && h2) { h2.tabIndex = -1; h2.focus({ preventScroll: true }); }
+      current = viewId;
+    }
+    window.dispatchEvent(new Event("resize"));  // let charts that measure themselves re-fit
+  }
+  window.atlasGo = id => { if (location.hash.slice(1) === id) show(); else location.hash = id; };
+  window.addEventListener("hashchange", show);
+  show();
+})();
+</script>
+
+<script>
+(async function () {
+  const $ = (s, el = document) => el.querySelector(s);
+  const fmt = new Intl.NumberFormat("es-ES");
+  const fmt1 = new Intl.NumberFormat("es-ES", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const fmt2 = new Intl.NumberFormat("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmt3 = new Intl.NumberFormat("es-ES", { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const deaccent = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const LETTER = "a-záéíóúüñ";
+
+  // ---------- tooltip
+  const tip = $("#tip");
+  function showTip(html, e) {
+    tip.innerHTML = html; tip.classList.add("show");
+    const pad = 14, r = tip.getBoundingClientRect();
+    let x = e.clientX + pad, y = e.clientY + pad;
+    if (x + r.width > innerWidth - 8) x = e.clientX - r.width - pad;
+    if (y + r.height > innerHeight - 8) y = e.clientY - r.height - pad;
+    tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px";
+  }
+  const hideTip = () => tip.classList.remove("show");
+  // tooltips work with mouse, touch (tap) and keyboard focus
+  function onTip(el, fn) {
+    el.addEventListener("pointermove", fn);
+    el.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") fn(e); });
+    el.addEventListener("focus", () => { const r = el.getBoundingClientRect(); fn({ clientX: r.left + r.width / 2, clientY: r.top }); });
+  }
+  function offTip(el) {
+    el.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") hideTip(); });
+    el.addEventListener("blur", hideTip);
+  }
+  document.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse" && !e.target.closest("[data-tipped]")) hideTip(); });
+
+
+  // ---------- data
+  let S, W, V, M;
+  try {
+    [S, W, V, M] = await Promise.all(["summary.json", "words.json", "verses.json", "meter.json"]
+      .map(f => fetch(f).then(r => { if (!r.ok) throw new Error(f); return r.json(); })));
+  } catch (err) {
+    $("#stats").innerHTML = '<span class="loading">No se pudieron cargar los datos del corpus. Recarga la página.</span>';
+    return;
+  }
+  const books = S.books;
+  const main = books.map((b, i) => i).filter(i => books[i].main);
+  const stop = new Set(S.stopwords);
+  const byForm = new Map(), rankOf = new Map(), byPlain = new Map();
+  W.forEach(([w, n, per], i) => {
+    const counts = new Map(per);
+    byForm.set(w, { n, counts });
+    rankOf.set(w, i + 1);
+    const p = deaccent(w);
+    if (!byPlain.has(p)) byPlain.set(p, []);
+    byPlain.get(p).push(w);
+  });
+  const lowerLines = V.map(v => v[2].toLowerCase());
+
+  // ---------- hero stats
+  const st = S.stats;
+  $("#stats").innerHTML = [
+    [st.pieces, "piezas (" + st.verse + " en verso, " + st.prose + " en prosa)"],
+    [st.words, "palabras"],
+    [st.forms, "formas distintas"],
+    [Math.round(100 * st.hapax / st.forms) + " %", "de las formas aparecen una sola vez"],
+  ].map(([v, l]) => `<div class="stat"><b class="num">${typeof v === "number" ? fmt.format(v) : v}</b><span>${l}</span></div>`).join("");
+
+  // datalist: frequent content words
+  $("#sugerencias").innerHTML = W.filter(r => !stop.has(r[0]) && r[0].length > 2).slice(0, 3000)
+    .map(r => `<option value="${r[0]}">`).join("");
+
+  // ---------- resolve a query to word forms
+  function plurals(w) {
+    const out = [w];
+    if (/[aeiouáéó]$/.test(w)) out.push(w + "s");
+    else if (/z$/.test(w)) out.push(w.slice(0, -1) + "ces");
+    else if (!/s$/.test(w)) out.push(w + "es");
+    // accent shifts in the plural: corazón → corazones, joven → jóvenes
+    return out;
+  }
+  function resolve(q) {
+    const forms = new Set();
+    for (let part of q.toLowerCase().split(",")) {
+      part = part.trim().replace(/[^a-záéíóúüñ]/g, "");
+      if (!part) continue;
+      let cands = plurals(part).filter(f => byForm.has(f));
+      if (!cands.length) {
+        const plain = deaccent(part);
+        cands = plurals(plain).flatMap(p => byPlain.get(deaccent(p)) || []);
+      } else {
+        // also pick accent variants of the plural (corazón → corazones)
+        for (const p of plurals(deaccent(part))) for (const f of byPlain.get(p) || []) if (f !== part) cands.push(f);
+      }
+      cands.filter(f => byForm.has(f)).forEach(f => forms.add(f));
+    }
+    return [...forms].sort((a, b) => byForm.get(b).n - byForm.get(a).n);
+  }
+
+  // ---------- explorer
+  let current = { forms: [], book: null, shown: 0, hits: [] };
+  const PAGE = 60;
+
+  function renderWord(q, scroll) {
+    const forms = resolve(q);
+    current = { forms, book: null, shown: 0, hits: [] };
+    const summary = $("#word-summary");
+    if (!forms.length) {
+      summary.innerHTML = `<div class="meta">«${esc(q.trim())}» no aparece en el corpus. Prueba sin tilde o con otra forma.</div>`;
+      $("#cols").innerHTML = ""; $("#col-labels").innerHTML = ""; $("#cols-note").textContent = "";
+      $("#conc").innerHTML = ""; $("#more").hidden = true; $("#conc-title").textContent = "Concordancia"; $("#conc-filter").textContent = "";
+      return;
+    }
+    const perBook = new Map();
+    let total = 0;
+    for (const f of forms) {
+      const r = byForm.get(f); total += r.n;
+      for (const [b, c] of r.counts) perBook.set(b, (perBook.get(b) || 0) + c);
+    }
+    const inBooks = [...perBook.keys()].length;
+    const outside = [...perBook].filter(([b]) => !books[b].main).reduce((a, [, c]) => a + c, 0);
+    const head = forms[0];
+    summary.innerHTML = `
+      <div class="big">${esc(forms.length > 1 && !q.includes(",") ? head : q.trim().toLowerCase())}</div>
+      <div class="meta"><b class="num">${fmt.format(total)}</b> apariciones · en <b>${inBooks}</b> de ${books.length} libros y grupos${forms.length === 1 ? ` · puesto <b class="num">${fmt.format(rankOf.get(head))}</b> de ${fmt.format(W.length)}` : ""}</div>
+      <div class="forms">Formas: ${forms.map(f => `<b>${esc(f)}</b> ${fmt.format(byForm.get(f).n)}`).join(" · ")}</div>`;
+
+    const rates = main.map(b => ({ b, c: perBook.get(b) || 0, r: (perBook.get(b) || 0) / books[b].words * 10000 }));
+    const max = Math.max(...rates.map(x => x.r), 0.0001);
+    $("#cols").innerHTML = rates.map(x => `
+      <div class="col ${x.c ? "" : "zero"}" role="listitem" data-b="${x.b}" tabindex="0" aria-label="${esc(books[x.b].short)}: ${fmt1.format(x.r)} por 10.000 palabras">
+        <span class="v num">${x.c ? fmt1.format(x.r) : ""}</span>
+        <div class="bar" style="height:${(x.r / max) * 82}%"></div>
+      </div>`).join("");
+    $("#col-labels").innerHTML = main.map(b => `<div><b>${books[b].year}</b><span>${esc(books[b].short)}</span></div>`).join("");
+    $("#cols-note").textContent = "Por cada 10.000 palabras de cada libro. Pulsa una columna para ver solo los versos de ese libro."
+      + (outside ? ` Fuera de estos diez libros: ${fmt.format(outside)} apariciones.` : "");
+
+    $("#cols").querySelectorAll(".col").forEach(el => {
+      const b = +el.dataset.b, x = rates.find(r => r.b === b);
+      el.dataset.tipped = ""; onTip(el, e => showTip(`<b>${esc(books[b].short)}</b> (${books[b].year})<br>${fmt1.format(x.r)} por 10.000 palabras<br>${fmt.format(x.c)} apariciones en ${fmt.format(books[b].words)} palabras`, e));
+      offTip(el);
+      const toggle = () => { current.book = current.book === b ? null : b; filterBook(); };
+      el.addEventListener("click", toggle);
+      el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+    });
+
+    const re = new RegExp(`(?<![${LETTER}])(${forms.join("|")})(?![${LETTER}])`, "i");
+    const hits = [];
+    for (let i = 0; i < V.length; i++) if (re.test(lowerLines[i])) hits.push(i);
+    current.hits = hits; current.re = re;
+    filterBook();
+    if (scroll) window.atlasGo("explorador");
+  }
+
+  function filterBook() {
+    const b = current.book;
+    $("#cols").classList.toggle("filtered", b !== null);
+    $("#cols").querySelectorAll(".col").forEach(el => el.classList.toggle("on", +el.dataset.b === b));
+    current.list = b === null ? current.hits : current.hits.filter(i => V[i][0] === b);
+    current.shown = 0;
+    $("#conc").innerHTML = "";
+    $("#conc-title").textContent = `Concordancia · ${fmt.format(current.list.length)} ${current.list.length === 1 ? "verso" : "versos"}`;
+    $("#conc-filter").innerHTML = b === null ? "" :
+      `Solo <i>${esc(books[b].short)}</i> · <button class="chip" id="clear-book">Ver todos los libros</button>`;
+    const clr = $("#clear-book");
+    if (clr) clr.onclick = () => { current.book = null; filterBook(); };
+    moreLines();
+  }
+
+  function cropLine(text, re) {
+    const m = re.exec(text.toLowerCase());
+    if (!m) return esc(text);
+    let s = 0, e = text.length, pre = "", post = "";
+    if (text.length > 170) {
+      s = Math.max(0, m.index - 80); e = Math.min(text.length, m.index + m[0].length + 80);
+      if (s > 0) { s = text.indexOf(" ", s) + 1 || s; pre = "… "; }
+      if (e < text.length) { const sp = text.lastIndexOf(" ", e); if (sp > m.index + m[0].length) e = sp; post = " …"; }
+    }
+    const a = m.index;
+    return pre + esc(text.slice(s, a)) + "<mark>" + esc(text.slice(a, a + m[0].length)) + "</mark>" + esc(text.slice(a + m[0].length, e)) + post;
+  }
+
+  function moreLines() {
+    const slice = current.list.slice(current.shown, current.shown + PAGE);
+    $("#conc").insertAdjacentHTML("beforeend", slice.map(i => {
+      const [b, p, text] = V[i];
+      const piece = S.pieces[p];
+      return `<li><div class="verse">${cropLine(text, current.re)}</div>
+        <div class="src"><i>${esc(piece[0])}</i>${esc(books[b].short)}${books[b].year ? " · " + books[b].year : ""}</div></li>`;
+    }).join(""));
+    current.shown += slice.length;
+    const left = current.list.length - current.shown;
+    $("#more").hidden = left <= 0;
+    $("#more").textContent = `Mostrar más versos (quedan ${fmt.format(left)})`;
+  }
+  $("#more").addEventListener("click", moreLines);
+
+  let timer;
+  $("#q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => renderWord(e.target.value), 220); });
+  $("#q").addEventListener("keydown", e => { if (e.key === "Enter") { clearTimeout(timer); renderWord(e.target.value); } });
+  function openWord(w) { $("#q").value = w; renderWord(w, true); }
+
+  ["cisne", "azul", "princesa", "muerte", "sangre", "América", "centauro", "rosa, lirio"].forEach(w => {
+    const b = document.createElement("button");
+    b.className = "chip"; b.textContent = w; b.onclick = () => openWord(w);
+    $("#try").appendChild(b);
+  });
+
+  // ---------- vocabulary
+  const POS = [["NOUN", "Sustantivos"], ["ADJ", "Adjetivos"], ["VERB", "Verbos"]];
+  function hbars(el, rows, opts = {}) {
+    const max = Math.max(...rows.map(r => r[1]));
+    el.innerHTML = rows.map(([w, v, extra]) => `
+      <div class="hb" data-w="${esc(w)}" tabindex="0" role="button" aria-label="${esc(w)}: ${opts.fmt ? opts.fmt(v) : fmt.format(v)}">
+        <div class="w">${esc(w)}</div>
+        <div class="track"><div class="fill" style="width:${(v / max) * 85}%"></div><span class="n num">${opts.fmt ? opts.fmt(v) : fmt.format(v)}</span></div>
+      </div>`).join("");
+    el.querySelectorAll(".hb").forEach((row, i) => {
+      const open = () => openWord(opts.word ? opts.word(rows[i]) : rows[i][0]);
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", e => { if (e.key === "Enter") open(); });
+      if (opts.tip) {
+        row.dataset.tipped = ""; onTip(row, e => showTip(opts.tip(rows[i]), e));
+        offTip(row);
+      }
+    });
+  }
+  function showPos(pos) {
+    $("#pos-tabs").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.pos === pos));
+    hbars($("#pos-bars"), S.top[pos].slice(0, 25), {
+      tip: r => `<b>${esc(r[0])}</b><br>${fmt.format(r[1])} apariciones (todas sus formas)<br>Pulsa para abrirla en el explorador`,
+    });
+  }
+  $("#pos-tabs").innerHTML = POS.map(([p, l]) => `<button class="chip" role="tab" data-pos="${p}">${l}</button>`).join("");
+  $("#pos-tabs").querySelectorAll(".chip").forEach(c => c.onclick = () => showPos(c.dataset.pos));
+  showPos("NOUN");
+
+  // ---------- motifs heatmap
+  const motifs = Object.entries(S.motifs).map(([label, forms]) => ({ label, forms }));
+  function renderHeat() {
+    const rows = motifs.map(m => {
+      const per = new Map();
+      for (const f of m.forms) for (const [b, c] of (byForm.get(f)?.counts || [])) per.set(b, (per.get(b) || 0) + c);
+      return { ...m, cells: main.map(b => ({ b, c: per.get(b) || 0, r: (per.get(b) || 0) / books[b].words * 10000 })) };
+    });
+    const all = rows.flatMap(r => r.cells.map(c => c.r)).sort((a, b) => a - b);
+    const vmax = Math.max(all[Math.floor(all.length * 0.97)] || 1, 1);
+    $("#legend-max").textContent = fmt.format(Math.round(vmax)) + "+";
+    $("#heat").innerHTML =
+      `<colgroup><col class="lab">${main.map(() => "<col>").join("")}<col class="del"></colgroup>` +
+      `<thead><tr><th></th>${main.map(b => `<th><b>${books[b].year}</b>${esc(books[b].short)}</th>`).join("")}<th></th></tr></thead><tbody>` +
+      rows.map((r, ri) => `<tr><th class="row" data-ri="${ri}" tabindex="0">${esc(r.label)}</th>` +
+        r.cells.map(c => {
+          const t = Math.min(c.r / vmax, 1);
+          const cls = c.r < 0.5 ? "none" : t > 0.55 ? "dark" : "";
+          return `<td class="num ${cls}" style="--t:${t.toFixed(3)}" data-ri="${ri}" data-b="${c.b}">${c.r < 0.5 ? "·" : fmt.format(Math.round(c.r))}</td>`;
+        }).join("") +
+        `<td style="background:none"><button class="x" data-ri="${ri}" aria-label="Quitar ${esc(r.label)}">×</button></td></tr>`).join("") + "</tbody>";
+    $("#heat").querySelectorAll("td[data-b]").forEach(td => {
+      const r = rows[+td.dataset.ri], c = r.cells.find(c => c.b === +td.dataset.b);
+      td.dataset.tipped = ""; onTip(td, e => showTip(`<b>${esc(r.label)}</b> en <i>${esc(books[c.b].short)}</i> (${books[c.b].year})<br>${fmt1.format(c.r)} por 10.000 palabras · ${fmt.format(c.c)} apariciones<br>Formas: ${esc(r.forms.join(", "))}`, e));
+      offTip(td);
+    });
+    $("#heat").querySelectorAll("th.row").forEach(th => {
+      const open = () => openWord(rows[+th.dataset.ri].forms.join(", "));
+      th.addEventListener("click", open);
+      th.addEventListener("keydown", e => { if (e.key === "Enter") open(); });
+    });
+    $("#heat").querySelectorAll(".x").forEach(x => x.onclick = () => { motifs.splice(+x.dataset.ri, 1); renderHeat(); });
+  }
+  function addMotif() {
+    const q = $("#add-motif").value.trim();
+    if (!q) return;
+    const forms = resolve(q);
+    if (!forms.length) { $("#add-msg").textContent = `«${q}» no aparece en el corpus.`; return; }
+    motifs.push({ label: q.split(",")[0].trim().toLowerCase(), forms });
+    $("#add-motif").value = ""; $("#add-msg").textContent = `Añadido: ${forms.join(", ")}`;
+    renderHeat();
+  }
+  $("#add-btn").onclick = addMotif;
+  $("#add-motif").addEventListener("keydown", e => { if (e.key === "Enter") addMotif(); });
+  renderHeat();
+
+  // ---------- distinctive words
+  function showBook(b) {
+    $("#book-chips").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", +c.dataset.b === b));
+    hbars($("#dist-bars"), S.distinctive[b], {
+      fmt: v => fmt1.format(v),
+      tip: r => `<b>${esc(r[0])}</b><br>Puntuación z: ${fmt1.format(r[1])}<br>En ${r[3] ?? "?"} de las ${r[4] ?? "?"} piezas del libro · ${fmt.format(r[2])} apariciones en el libro, ${fmt.format(byForm.get(r[0])?.n ?? r[2])} en toda la obra`,
+    });
+  }
+  $("#book-chips").innerHTML = main.map(b => `<button class="chip" data-b="${b}">${esc(books[b].short)} <span style="opacity:.7">${books[b].year}</span></button>`).join("");
+  $("#book-chips").querySelectorAll(".chip").forEach(c => c.onclick = () => showBook(+c.dataset.b));
+  showBook(main.find(b => books[b].short === "Prosas profanas") ?? main[0]);
+
+  // ---------- Zipf
+  (function zipf() {
+    const NS = "http://www.w3.org/2000/svg";
+    const Wd = 900, H = 460, m = { l: 62, r: 20, t: 16, b: 46 };
+    const n = W.length, f0 = W[0][1];
+    const lx = r => m.l + Math.log10(r) / Math.log10(n * 1.15) * (Wd - m.l - m.r);
+    const ymax = Math.log10(f0 * 1.6), ymin = Math.log10(0.6);
+    const ly = f => m.t + (ymax - Math.log10(f)) / (ymax - ymin) * (H - m.t - m.b);
+    let svg = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Frecuencia frente a puesto, en escala logarítmica">`;
+    for (const v of [1, 10, 100, 1000, 10000]) {
+      svg += `<line x1="${m.l}" x2="${Wd - m.r}" y1="${ly(v)}" y2="${ly(v)}" stroke="var(--line)" stroke-width="1"/>`;
+      svg += `<text x="${m.l - 8}" y="${ly(v) + 4}" text-anchor="end">${fmt.format(v)}</text>`;
+      if (v <= n) {
+        svg += `<line y1="${m.t}" y2="${H - m.b}" x1="${lx(v)}" x2="${lx(v)}" stroke="var(--line)" stroke-width="1"/>`;
+        svg += `<text x="${lx(v)}" y="${H - m.b + 18}" text-anchor="middle">${fmt.format(v)}</text>`;
+      }
+    }
+    svg += `<text x="${(m.l + Wd - m.r) / 2}" y="${H - 6}" text-anchor="middle">puesto (1 = la palabra más frecuente)</text>`;
+    svg += `<text transform="translate(14 ${(m.t + H - m.b) / 2}) rotate(-90)" text-anchor="middle">apariciones</text>`;
+    // Zipf reference
+    svg += `<line x1="${lx(1)}" y1="${ly(f0)}" x2="${lx(n)}" y2="${ly(f0 / n)}" stroke="var(--muted)" stroke-width="1.2"/>`;
+    {
+      const r0 = 2500, x0 = lx(r0), y0 = ly(f0 / r0) + 16;
+      const ang = Math.atan2(ly(f0 / n) - ly(f0), lx(n) - lx(1)) * 180 / Math.PI;
+      svg += `<text x="${x0}" y="${y0}" transform="rotate(${ang.toFixed(1)} ${x0} ${y0})" text-anchor="middle">ley de Zipf (f ∝ 1/puesto)</text>`;
+    }
+    // curve: one vertex per pixel column
+    let d = "", lastX = -1;
+    for (let i = 0; i < n; i++) {
+      const x = lx(i + 1);
+      if (x - lastX < 0.8 && i < n - 1) continue;
+      d += (d ? "L" : "M") + x.toFixed(1) + " " + ly(W[i][1]).toFixed(1);
+      lastX = x;
+    }
+    svg += `<path d="${d}" fill="none" stroke="var(--azul)" stroke-width="2.2" stroke-linejoin="round"/>`;
+    for (const w of ["de", "y", "que", "luz", "azul", "cisne", "pegaso", "centauro"]) {
+      const r = rankOf.get(w); if (!r) continue;
+      const fw = W[r - 1][1], fn = stop.has(w);
+      svg += `<circle cx="${lx(r)}" cy="${ly(fw)}" r="4.5" fill="${fn ? "var(--muted)" : "var(--azul)"}" stroke="var(--surface)" stroke-width="1.5"/>`;
+      svg += `<text class="lab ${fn ? "fn" : ""}" x="${lx(r) + 8}" y="${ly(fw) - 7}">${w}</text>`;
+    }
+    svg += `<line id="zx" y1="${m.t}" y2="${H - m.b}" stroke="var(--oro)" stroke-width="1" visibility="hidden"/>`;
+    svg += `<circle id="zd" r="5" fill="var(--oro)" stroke="var(--surface)" stroke-width="1.5" visibility="hidden"/>`;
+    svg += `<rect id="zhit" x="${m.l}" y="${m.t}" width="${Wd - m.l - m.r}" height="${H - m.t - m.b}" fill="transparent"/>`;
+    svg += "</svg>";
+    $("#zipf-panel").innerHTML = svg;
+    const el = $("#zipf-panel svg"), zx = $("#zx", el), zd = $("#zd", el), hit = $("#zhit", el);
+    hit.dataset.tipped = ""; onTip(hit, e => {
+      const pt = el.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+      const p = pt.matrixTransform(el.getScreenCTM().inverse());
+      const frac = (p.x - m.l) / (Wd - m.l - m.r);
+      const r = Math.min(n, Math.max(1, Math.round(Math.pow(n * 1.15, frac))));
+      const [w, c] = W[r - 1];
+      zx.setAttribute("x1", lx(r)); zx.setAttribute("x2", lx(r)); zx.setAttribute("visibility", "visible");
+      zd.setAttribute("cx", lx(r)); zd.setAttribute("cy", ly(c)); zd.setAttribute("visibility", "visible");
+      const same = W.filter(x => x[1] === c).length;
+      showTip(`Puesto <b>${fmt.format(r)}</b>: <b>${esc(w)}</b><br>${fmt.format(c)} ${c === 1 ? "aparición" : "apariciones"}` +
+        (same > 1 ? `<br><span style="opacity:.75">${fmt.format(same)} formas comparten esta frecuencia</span>` : ""), e);
+    });
+    hit.addEventListener("mouseleave", () => { zx.setAttribute("visibility", "hidden"); zd.setAttribute("visibility", "hidden"); hideTip(); });
+    hit.addEventListener("click", () => { const w = tip.querySelector("b:nth-of-type(2)")?.textContent; if (w) openWord(w); });
+  })();
+
+
+  // ---------- métrica
+  (function metrica() {
+    const SYL = []; for (let k = 4; k <= 18; k++) SYL.push(k);
+    const NAMES = { 7: "heptasílabo", 8: "octosílabo", 9: "eneasílabo", 10: "decasílabo", 11: "endecasílabo", 12: "dodecasílabo", 14: "alejandrino" };
+    const byBook = new Map(main.map(b => [b, []]));
+    M.forEach(r => { const b = S.pieces[r[0]][1]; if (byBook.has(b) && r[2]) byBook.get(b).push(r); });
+    const pct = v => fmt.format(Math.round(v)) + " %";
+
+    // heatmap books × syllables
+    const vmax = 60;
+    $("#meter-heat").innerHTML =
+      `<colgroup><col class="lab">${SYL.map(() => "<col>").join("")}</colgroup>` +
+      `<thead><tr><th></th>${SYL.map(k => `<th><b>${k}</b>${k === 14 ? "alej." : k === 11 ? "endec." : ""}</th>`).join("")}</tr></thead><tbody>` +
+      main.map(b => {
+        const rows = byBook.get(b), n = rows.length, cnt = new Map();
+        rows.forEach(r => cnt.set(r[2], (cnt.get(r[2]) || 0) + 1));
+        return `<tr><th class="row">${esc(books[b].short)} (${books[b].year})<small>${fmt.format(n)} versos</small></th>` +
+          SYL.map(k => {
+            const c = cnt.get(k) || 0, v = n ? 100 * c / n : 0, t = Math.min(v / vmax, 1);
+            const cls = v < 1 ? "none" : t > 0.55 ? "dark" : "";
+            return `<td class="num ${cls}" style="--t:${t.toFixed(3)}" data-tip="<b>${esc(books[b].short)}</b> (${books[b].year})<br>${k} sílabas${NAMES[k] ? " · " + NAMES[k] : ""}<br>${fmt1.format(v)} % de los versos (${fmt.format(c)} de ${fmt.format(n)})">${v < 1 ? "·" : fmt.format(Math.round(v))}</td>`;
+          }).join("") + "</tr>";
+      }).join("") + "</tbody>";
+    $("#meter-heat").querySelectorAll("td[data-tip]").forEach(td => {
+      td.dataset.tipped = ""; onTip(td, e => showTip(td.dataset.tip, e));
+      offTip(td);
+    });
+
+    // stress fingerprint
+    const METRES = [[8, "Octosílabo"], [9, "Eneasílabo"], [11, "Endecasílabo"], [12, "Dodecasílabo"], [14, "Alejandrino"]];
+    function showStress(n) {
+      $("#stress-tabs").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", +c.dataset.n === n));
+      const lines = M.filter(r => r[2] === n && r[3].length === n);
+      const prob = Array.from({ length: n }, (_, i) => 100 * lines.filter(r => r[3][i] === "+").length / lines.length);
+      const grid = `repeat(${n}, minmax(0, 1fr))`;
+      const ces = n === 12 ? 7 : n === 14 ? 8 : 0;
+      $("#stress-cols").style.gridTemplateColumns = grid;
+      $("#stress-labels").style.gridTemplateColumns = grid;
+      $("#stress-cols").innerHTML = prob.map((p, i) => `
+        <div class="col ${i + 1 === ces ? "cesura" : ""}" data-i="${i}">
+          <span class="v num">${p >= 50 ? fmt.format(Math.round(p)) : ""}</span>
+          <div class="bar ${p >= 50 ? "" : "weak"}" style="height:${Math.max(p, 0.5) * 0.85}%"></div>
+        </div>`).join("");
+      $("#stress-labels").innerHTML = prob.map((_, i) => `<div>${i + 1}</div>`).join("");
+      $("#stress-cols").querySelectorAll(".col").forEach(el => {
+        const i = +el.dataset.i;
+        el.dataset.tipped = ""; onTip(el, e => showTip(`Sílaba <b>${i + 1}</b><br>acentuada en el ${fmt1.format(prob[i])} % de los versos`, e));
+        offTip(el);
+      });
+      $("#stress-note").textContent = `${fmt.format(lines.length)} versos de ${n} sílabas. Azul: sílabas acentuadas en la mitad de los versos o más.` +
+        (ces ? " La línea vertical marca la cesura entre los dos hemistiquios." : "");
+    }
+    $("#stress-tabs").innerHTML = METRES.map(([n, l]) => `<button class="chip" data-n="${n}">${l} · ${n}</button>`).join("");
+    $("#stress-tabs").querySelectorAll(".chip").forEach(c => c.onclick = () => showStress(+c.dataset.n));
+    showStress(14);
+
+    // stacked bars helper
+    function stacks(el, keysEl, cats, rows) {
+      keysEl.innerHTML = cats.map(c => `<span><i style="background:var(${c.color})"></i>${c.label}</span>`).join("");
+      el.innerHTML = rows.map(r => {
+        const tot = r.counts.reduce((a, b) => a + b, 0);
+        return `<div class="stack"><div class="lab">${esc(r.label)}<br><small>${r.sub}</small></div><div class="bar">` +
+          cats.map((c, i) => {
+            const v = tot ? 100 * r.counts[i] / tot : 0;
+            if (!v) return "";
+            const ink = c.color === "--c4" ? "var(--on-c4)" : c.color === "--c-none" ? "var(--on-none)" : "var(--on-c)";
+            return `<div class="seg" style="width:${v}%;background:var(${c.color});color:${ink}" data-tip="<b>${esc(r.label)}</b><br>${esc(c.label)}: ${fmt1.format(v)} % (${fmt.format(r.counts[i])} versos)">${v >= 7 ? fmt.format(Math.round(v)) : ""}</div>`;
+          }).join("") + "</div></div>";
+      }).join("");
+      el.querySelectorAll(".seg").forEach(sg => {
+        sg.dataset.tipped = ""; onTip(sg, e => showTip(sg.dataset.tip, e));
+        offTip(sg);
+      });
+    }
+
+    // endecasílabo types
+    const TYPES = [
+      ["enfático", "1.ª y 6.ª", "--c1"], ["heroico", "2.ª y 6.ª", "--c2"], ["melódico", "3.ª y 6.ª", "--c3"],
+      ["4.ª y 6.ª", "", "--c7"], ["sáfico", "4.ª y 8.ª", "--c4"], ["dactílico", "4.ª y 7.ª", "--c5"], ["otros", "", "--c-none"],
+    ];
+    function endecaType(st) {
+      const on = i => st[i - 1] === "+";
+      if (on(6)) { if (on(1)) return 0; if (on(2)) return 1; if (on(3)) return 2; if (on(4)) return 3; }
+      if (on(4) && on(8)) return 4;
+      if (on(4) && on(7)) return 5;
+      return 6;
+    }
+    stacks($("#endeca"), $("#endeca-keys"),
+      TYPES.map(([t, r, c]) => ({ label: r ? `${t} (${r})` : t, color: c })),
+      main.map(b => {
+        const e = byBook.get(b).filter(r => r[2] === 11 && r[3].length === 11);
+        const counts = [0, 0, 0, 0, 0, 0, 0];
+        e.forEach(r => counts[endecaType(r[3])]++);
+        return { label: `${books[b].short} (${books[b].year})`, sub: `${fmt.format(e.length)} endecasílabos`, counts, n: e.length };
+      }).filter(r => r.n >= 40));
+
+    // rhyme
+    stacks($("#rhyme"), $("#rhyme-keys"),
+      [{ label: "consonante", color: "--c1" }, { label: "asonante", color: "--c2" }, { label: "sin rima", color: "--c-none" }],
+      main.map(b => {
+        const rows = byBook.get(b).filter(r => r[4] !== "?");
+        const counts = [0, 0, 0];
+        rows.forEach(r => counts[r[4] === "-" || !r[4] ? 2 : r[5] === "a" ? 1 : 0]++);
+        return { label: `${books[b].short} (${books[b].year})`, sub: `${fmt.format(rows.length)} versos`, counts };
+      }));
+
+    // poem scansion
+    const byPiece = new Map();
+    M.forEach((r, i) => { if (!byPiece.has(r[0])) byPiece.set(r[0], []); byPiece.get(r[0]).push(r); });
+    const groups = books.map((b, bi) => ({ b, bi, ps: [...byPiece.keys()].filter(p => S.pieces[p][1] === bi) })).filter(g => g.ps.length);
+    $("#poem").innerHTML = groups.map(g => `<optgroup label="${esc(g.b.short)}${g.b.year ? " (" + g.b.year + ")" : ""}">` +
+      g.ps.map(p => `<option value="${p}">${esc(S.pieces[p][0])}</option>`).join("") + "</optgroup>").join("");
+    function showPoem(p) {
+      const rows = byPiece.get(p) || [];
+      const cnt = new Map(); rows.forEach(r => r[2] && cnt.set(r[2], (cnt.get(r[2]) || 0) + 1));
+      const top = [...cnt].sort((a, b) => b[1] - a[1]).slice(0, 3)
+        .map(([k, c]) => `${k} sílabas${NAMES[k] ? " (" + NAMES[k] + ")" : ""}: ${fmt.format(c)}`).join(" · ");
+      $("#scan-meta").textContent = `${fmt.format(rows.length)} versos · ${top}`;
+      $("#scan").innerHTML = rows.map((r, i) => {
+        const dots = r[3] ? [...r[3]].map(c => `<b class="${c === "+" ? "on" : ""}"></b>`).join("") : "";
+        const letter = r[4] && r[4] !== "-" && r[4] !== "?" ? r[4] : "";
+        const gap = i > 0 && r[7] !== rows[i - 1][7] ? "gap" : "";
+        return `<li class="${gap}" data-k="${r[1]}:${letter}" data-i="${i}"><span class="syl num">${r[2] ?? "–"}</span>` +
+          `<span class="txt">${esc(r[6])}</span><span class="dots" aria-hidden="true">${dots}</span>` +
+          `<span class="rh ${r[5]}" title="${r[5] === "c" ? "rima consonante" : r[5] === "a" ? "rima asonante" : ""}">${letter}</span></li>`;
+      }).join("");
+      const lis = [...$("#scan").children];
+      lis.forEach(li => {
+        li.addEventListener("pointerenter", () => {
+          const k = li.dataset.k;
+          if (k.endsWith(":")) return;
+          lis.forEach(o => o.classList.toggle("hl", o.dataset.k === k));
+        });
+        li.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") lis.forEach(o => o.classList.remove("hl")); });
+      });
+    }
+    $("#poem").addEventListener("change", e => showPoem(+e.target.value));
+    const sonatina = S.pieces.findIndex(p => p[0] === "Sonatina");
+    const start = byPiece.has(sonatina) ? sonatina : [...byPiece.keys()][0];
+    $("#poem").value = start; showPoem(start);
+  })();
+
+
+  // ---------- paleta
+  (function paleta() {
+    const fam = (groups) => Object.entries(groups).map(([name, [hex, forms]]) => {
+      const per = new Map(); let n = 0;
+      forms.forEach(f => (byForm.get(f)?.counts || new Map()).forEach((c, b) => { per.set(b, (per.get(b) || 0) + c); n += c; }));
+      return { name, hex, forms, per, n };
+    });
+    const cols = fam(S.colors), jw = fam(S.materials);
+    const inkOn = hex => { const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255); return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.55 ? "#11152b" : "#ffffff"; };
+    const totalWords = books.reduce((a, b) => a + b.words, 0);
+    const rows = [{ label: "Toda la obra", get: c => c.n, words: totalWords, all: true }]
+      .concat(main.map(b => ({ label: `${books[b].short} (${books[b].year})`, get: c => c.per.get(b) || 0, words: books[b].words })));
+    $("#palette").innerHTML = rows.map(r => {
+      const vals = cols.map(c => ({ c, v: r.get(c) })).filter(x => x.v).sort((a, b) => b.v - a.v);
+      const tot = vals.reduce((a, x) => a + x.v, 0);
+      return `<div class="prow ${r.all ? "all" : ""}"><div class="lab">${esc(r.label)}</div><div class="strip">` +
+        vals.map(({ c, v }) => {
+          const w = 100 * v / tot;
+          return `<div class="sw" role="button" tabindex="0" style="width:${w}%;background:${c.hex};color:${inkOn(c.hex)}" data-forms="${esc(c.forms.join(", "))}" data-tip="<b>${esc(c.name)}</b> · ${esc(r.label)}<br>${fmt.format(v)} apariciones · ${fmt1.format(w)} % de las palabras de color">${w >= 6 ? esc(c.name) : ""}</div>`;
+        }).join("") + `</div><div class="tot num">${fmt.format(tot)} · ${fmt1.format(1000 * tot / r.words)} ‰</div></div>`;
+    }).join("");
+    const fitLabels = () => $("#palette").querySelectorAll(".sw").forEach(sw => {
+      sw.classList.remove("nolab");
+      if (sw.scrollWidth > sw.clientWidth + 1) sw.classList.add("nolab");
+    });
+    fitLabels();
+    addEventListener("resize", fitLabels);
+    $("#palette").querySelectorAll(".sw").forEach(sw => {
+      sw.dataset.tipped = ""; onTip(sw, e => showTip(sw.dataset.tip, e));
+      offTip(sw);
+      const open = () => openWord(sw.dataset.forms);
+      sw.addEventListener("click", open);
+      sw.addEventListener("keydown", e => { if (e.key === "Enter") open(); });
+    });
+    const jmax = Math.max(...jw.map(j => j.n));
+    $("#jewels").innerHTML = jw.sort((a, b) => b.n - a.n).map(j => `
+      <div class="jw" role="button" tabindex="0" data-forms="${esc(j.forms.join(", "))}">
+        <div class="w">${esc(j.name)}</div><div class="dot" style="background:${j.hex}"></div>
+        <div class="track"><div class="fill" style="width:${85 * j.n / jmax}%"></div><span class="n num">${fmt.format(j.n)}</span></div>
+      </div>`).join("");
+    $("#jewels").querySelectorAll(".jw").forEach(el => {
+      const open = () => openWord(el.dataset.forms);
+      el.addEventListener("click", open);
+      el.addEventListener("keydown", e => { if (e.key === "Enter") open(); });
+    });
+  })();
+
+
+  // ---------- rarezas
+  (function rarezas() {
+    const R = S.rare; if (!R) return;
+    const NS = 2.5;
+    const total = S.stats.words;
+    const pts = R.points.map(([w, n, z]) => ({ w, n, z, d: Math.log10(n / total * 1e9) }));
+    pts.forEach(p => p.over = p.d - Math.max(p.z, 1));
+    const top = new Set(pts.filter(p => p.z > 0).sort((a, b) => b.over - a.over).slice(0, 14).map(p => p.w));
+    const Wd = 900, H = 520, m = { l: 52, r: 16, t: 14, b: 44 };
+    const ymin = Math.min(...pts.map(p => p.d)) - 0.15, ymax = Math.max(...pts.map(p => p.d)) + 0.2;
+    const x = z => m.l + (z + 0.2) / 7.4 * (Wd - m.l - m.r);
+    const y = d => m.t + (ymax - d) / (ymax - ymin) * (H - m.t - m.b);
+    let svg = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Frecuencia en Darío frente a frecuencia en los libros de su época">`;
+    for (let v = 0; v <= 7; v++) svg += `<line x1="${x(v)}" x2="${x(v)}" y1="${m.t}" y2="${H - m.b}" stroke="var(--line)"/><text x="${x(v)}" y="${H - m.b + 16}" text-anchor="middle">${v}</text>`;
+    for (let v = Math.ceil(ymin * 2) / 2; v <= ymax; v += 0.5) svg += `<line x1="${m.l}" x2="${Wd - m.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${m.l - 6}" y="${y(v) + 4}" text-anchor="end">${fmt1.format(v)}</text>`;
+    svg += `<line x1="${x(ymin)}" y1="${y(ymin)}" x2="${x(Math.min(7.2, ymax))}" y2="${y(Math.min(7.2, ymax))}" stroke="var(--muted)" stroke-width="1"/>`;
+    svg += `<text x="${(m.l + Wd - m.r) / 2}" y="${H - 6}" text-anchor="middle">frecuencia en libros de 1880–1920 (Zipf)</text>`;
+    svg += `<text transform="translate(13 ${(m.t + H - m.b) / 2}) rotate(-90)" text-anchor="middle">frecuencia en Darío (Zipf)</text>`;
+    const order = pts.slice().sort((a, b) => (top.has(a.w) || a.z === 0) - (top.has(b.w) || b.z === 0));
+    order.forEach((p, i) => {
+      const cls = p.z === 0 ? "abs" : top.has(p.w) ? "top" : "";
+      const jitter = p.z === 0 ? ((i * 37) % 13) * 0.012 : 0;
+      svg += `<circle class="pt ${cls}" cx="${x(p.z + jitter).toFixed(1)}" cy="${y(p.d).toFixed(1)}" r="${cls ? 4 : 2.6}" data-w="${esc(p.w)}"/>`;
+    });
+    svg += "</svg>";
+    $("#rare-plot").innerHTML = svg;
+    const byW = new Map(pts.map(p => [p.w, p]));
+    $("#rare-plot").querySelectorAll("circle").forEach(c => {
+      const p = byW.get(c.dataset.w);
+      c.style.cursor = "pointer";
+      c.dataset.tipped = ""; onTip(c, e => showTip(`<b>${esc(p.w)}</b><br>${fmt.format(p.n)} veces en Darío<br>Zipf en libros de 1880–1920: ${p.z ? fmt1.format(p.z) : "no encontrada"}`, e));
+      offTip(c);
+      c.addEventListener("click", () => openWord(p.w));
+    });
+
+    // per-book bars
+    const rows = main.filter(b => R.books[b]).map(b => ({ b, r: R.books[b] }));
+    const mx = Math.max(...rows.map(o => o.r.rare + o.r.absent)) * 1.12;
+    $("#rare-bars").innerHTML = rows.map(({ b, r }) => `
+      <div class="stack"><div class="lab">${esc(books[b].short)} (${books[b].year})</div><div class="bar">
+        <div class="seg" style="width:${100 * r.rare / mx}%;background:var(--c1)" data-tip="<b>${esc(books[b].short)}</b><br>raras en su época: ${fmt1.format(r.rare)} %">${fmt1.format(r.rare)}</div>
+        <div class="seg" style="width:${100 * r.absent / mx}%;background:var(--c2)" data-tip="<b>${esc(books[b].short)}</b><br>no encontradas: ${fmt1.format(r.absent)} %">${fmt1.format(r.absent)}</div>
+        <span class="note" style="align-self:center;margin-left:8px">${fmt1.format(r.rare + r.absent)} %</span>
+      </div></div>`).join("");
+    $("#rare-bars").querySelectorAll(".seg").forEach(sg => {
+      sg.dataset.tipped = ""; onTip(sg, e => showTip(sg.dataset.tip, e));
+      offTip(sg);
+    });
+
+    // rare words per book
+    $("#rare-books").innerHTML = rows.map(({ b, r }) => `
+      <div class="rb"><div class="lab"><b>${fmt1.format(r.rare + r.absent)} %</b>${esc(books[b].short)} (${books[b].year})</div>
+      <div class="ws">${r.words.map(([w, n, z]) => `<button class="${z === 0 ? "abs" : ""}" data-w="${esc(w)}" title="${z === 0 ? "no encontrada en los libros de 1880–1920" : "Zipf en 1880–1920: " + fmt1.format(z)}">${esc(w)}<small>${n}</small></button>`).join("")}</div></div>`).join("");
+    $("#rare-books").querySelectorAll("button").forEach(bt => bt.onclick = () => openWord(bt.dataset.w));
+    // then and now
+    const TN = R.then_now;
+    if (TN) {
+      const col = (title, rows) => `<div><h4>${title}</h4><ol>${rows.slice(0, 12).map(([w, a, b]) =>
+        `<li><button data-w="${esc(w)}">${esc(w)}</button> <small>${fmt1.format(a)} → ${fmt1.format(b)}</small></li>`).join("")}</ol></div>`;
+      $("#then-now").innerHTML = col("Más raras hoy (Zipf 1880–1920 → 2000–2019)", TN.rarer_now) + col("Más comunes hoy", TN.commoner_now);
+      $("#then-now").querySelectorAll("button").forEach(bt => bt.onclick = () => openWord(bt.dataset.w));
+    }
+  })();
+
+
+
+  // ---------- referencias
+  (async function referencias() {
+    const RF = S.refs; if (!RF) return;
+    const catColor = { "mitología y leyenda": "--c1", "Biblia y cristianismo": "--c2", "letras y artes": "--c3", "historia": "--c4", "lugares": "--c5" };
+    const cats = Object.keys(RF.cats);
+    const ent = new Map(RF.entities.map(e => [e.name, e]));
+    const query = e => e.aliases.map(a => a.split(" ").pop().toLowerCase()).join(", ");
+    const tipFor = e => {
+      const top = Object.entries(e.books).sort((a, b) => b[1] - a[1]).slice(0, 3)
+        .map(([b, n]) => `${esc(books[b].short)} ${n}`).join(" · ");
+      return `<b>${esc(e.name)}</b> · ${esc(e.cat)}<br>${fmt.format(e.n)} menciones en ${e.pieces.length} piezas<br>${top}` +
+        (e.aliases.length > 1 ? `<br><span style="opacity:.75">${esc(e.aliases.join(", "))}</span>` : "");
+    };
+    $("#ref-keys").innerHTML = cats.map(c => `<span><i style="background:var(${catColor[c]})"></i>${esc(c)}</span>`).join("");
+
+    function showCat(c) {
+      $("#ref-tabs").querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === c));
+      const rows = RF.entities.filter(e => e.cat === c).sort((a, b) => b.n - a.n).slice(0, 20);
+      hbars($("#ref-bars"), rows.map(e => [e.name, e.n, e]), {
+        tip: r => tipFor(r[2]), word: r => query(r[2]),
+      });
+      $("#ref-bars").querySelectorAll(".fill").forEach(f => f.style.background = `var(${catColor[c]})`);
+    }
+    $("#ref-tabs").innerHTML = cats.map(c => `<button class="chip" data-c="${esc(c)}">${esc(c[0].toUpperCase() + c.slice(1))}</button>`).join("");
+    $("#ref-tabs").querySelectorAll(".chip").forEach(b => b.onclick = () => showCat(b.dataset.c));
+    showCat(cats[0]);
+
+    // network (layout computed in Python with networkx)
+    const G = RF.graph, Wd = 900, H = 620, pad = 46;
+    const xs = G.nodes.map(n => n.x), ys = G.nodes.map(n => n.y);
+    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+    const X = x => pad + (x - x0) / (x1 - x0) * (Wd - 2 * pad), Y = y => pad + (y1 - y) / (y1 - y0) * (H - 2 * pad);
+    const pos = new Map(G.nodes.map(n => [n.name, [X(n.x), Y(n.y)]]));
+    const wmax = Math.max(...G.edges.map(e => e[2]));
+    const nb = new Map(G.nodes.map(n => [n.name, new Set()]));
+    G.edges.forEach(([a, b]) => { nb.get(a).add(b); nb.get(b).add(a); });
+    const rad = name => 4 + Math.sqrt(ent.get(name).pieces.length) * 2.2;
+    let svg = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Red de nombres que aparecen juntos">`;
+    G.edges.forEach(([a, b, w], i) => {
+      const [ax, ay] = pos.get(a), [bx, by] = pos.get(b);
+      svg += `<line data-a="${esc(a)}" data-b="${esc(b)}" x1="${ax.toFixed(1)}" y1="${ay.toFixed(1)}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" stroke-width="${(0.6 + 2.4 * w / wmax).toFixed(2)}"/>`;
+    });
+    G.nodes.forEach(n => {
+      const [x, y] = pos.get(n.name), e = ent.get(n.name), r = rad(n.name);
+      svg += `<g data-n="${esc(n.name)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" style="fill:var(${catColor[e.cat]})"/>` +
+        `<text x="${x.toFixed(1)}" y="${(y + r + 12).toFixed(1)}" text-anchor="middle">${esc(n.name)}</text></g>`;
+    });
+    $("#net").innerHTML = svg + "</svg>";
+    const lines = [...$("#net").querySelectorAll("line")], groups = [...$("#net").querySelectorAll("g")];
+    groups.forEach(g => {
+      const name = g.dataset.n, e = ent.get(name);
+      g.addEventListener("pointerenter", () => {
+        const keep = nb.get(name);
+        groups.forEach(o => o.classList.toggle("dim", o.dataset.n !== name && !keep.has(o.dataset.n)));
+        lines.forEach(l => { const on = l.dataset.a === name || l.dataset.b === name; l.classList.toggle("on", on); l.classList.toggle("dim", !on); });
+      });
+      g.dataset.tipped = ""; onTip(g, ev => showTip(tipFor(e) + `<br>Comparte poemas con: ${[...nb.get(name)].map(esc).join(", ")}`, ev));
+      g.addEventListener("mouseleave", () => { hideTip(); groups.forEach(o => o.classList.remove("dim")); lines.forEach(l => l.classList.remove("on", "dim")); });
+      g.addEventListener("click", () => openWord(query(e)));
+    });
+
+    // map: equirectangular, land outline from TopoJSON decoded here
+    let topo;
+    try { topo = await fetch("land-110m.json").then(r => r.json()); } catch { return; }
+    const [sx, sy] = topo.transform.scale, [tx, ty] = topo.transform.translate;
+    const arcs = topo.arcs.map(a => { let x = 0, y = 0; return a.map(([dx, dy]) => { x += dx; y += dy; return [x * sx + tx, y * sy + ty]; }); });
+    const LON0 = -130, LON1 = 150, LAT0 = -50, LAT1 = 68, MW = 900;
+    const MH = MW * (LAT1 - LAT0) / (LON1 - LON0);
+    const px = lon => (lon - LON0) / (LON1 - LON0) * MW, py = lat => (LAT1 - lat) / (LAT1 - LAT0) * MH;
+    const ring = idx => idx.flatMap((i, k) => { const a = i >= 0 ? arcs[i] : arcs[~i].slice().reverse(); return k ? a.slice(1) : a; });
+    let d = "";
+    topo.objects.land.geometries.forEach(g => (g.type === "MultiPolygon" ? g.arcs : [g.arcs]).forEach(poly => poly.forEach(r => {
+      const pts = ring(r); const lons = pts.map(p => p[0]);
+      if (Math.max(...lons) - Math.min(...lons) > 300) return;
+      d += "M" + pts.map(([lo, la]) => px(lo).toFixed(1) + " " + py(la).toFixed(1)).join("L") + "Z";
+    })));
+    const places = RF.entities.filter(e => e.coords).sort((a, b) => b.n - a.n);
+    let msvg = `<svg viewBox="0 0 ${MW} ${MH.toFixed(0)}" role="img" aria-label="Mapa de los lugares nombrados"><path class="land" d="${d}"/>`;
+    places.slice().reverse().forEach(e => {
+      msvg += `<circle data-n="${esc(e.name)}" cx="${px(e.coords[1]).toFixed(1)}" cy="${py(e.coords[0]).toFixed(1)}" r="${(3 + Math.sqrt(e.n) * 2.6).toFixed(1)}"/>`;
+    });
+    const boxes = [];
+    places.forEach(e => {
+      const x = px(e.coords[1]), y = py(e.coords[0]), r = 3 + Math.sqrt(e.n) * 2.6, w = 6.2 * e.name.length + 8, h = 13;
+      for (const [bx, by, anchor] of [[x + r + 3, y - h / 2, "start"], [x - r - 3 - w, y - h / 2, "start"], [x - w / 2, y - r - h - 1, "start"], [x - w / 2, y + r + 1, "start"]]) {
+        if (bx < 0 || bx + w > MW) continue;
+        if (!boxes.some(([ox, oy, ow, oh]) => bx < ox + ow && ox < bx + w && by < oy + oh && oy < by + h)) {
+          boxes.push([bx, by, w, h]);
+          msvg += `<text x="${bx.toFixed(1)}" y="${(by + h - 3).toFixed(1)}">${esc(e.name)}</text>`;
+          break;
+        }
+      }
+    });
+    $("#map").innerHTML = msvg + "</svg>";
+    $("#map").querySelectorAll("circle").forEach(c => {
+      const e = ent.get(c.dataset.n);
+      c.dataset.tipped = ""; onTip(c, ev => showTip(tipFor(e), ev));
+      offTip(c);
+      c.addEventListener("click", () => openWord(query(e)));
+    });
+  })();
+
+
+  // ---------- mapa semántico
+  (function semantico() {
+    const SM = S.semantic; if (!SM) return;
+    const P = SM.pieces, Wd = 760, H = 560, pad = 18;
+    const xs = P.map(q => q.x), ys = P.map(q => q.y);
+    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+    const X = x => pad + (x - x0) / (x1 - x0) * (Wd - 2 * pad), Y = y => pad + (y1 - y) / (y1 - y0) * (H - 2 * pad);
+    const cl = SM.clusters;
+    $("#sem-keys").innerHTML = cl.map(c => `<span><i style="background:${c.color}"></i>${esc(c.name)}</span>`).join("");
+    let svg = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Mapa semántico de las piezas">`;
+    P.forEach((q, i) => {
+      const piece = S.pieces[q.p], col = cl[q.c].color, x = X(q.x), y = Y(q.y);
+      const sure = (q.conf ?? 1) >= 0.7;
+      const paint = sure ? `fill="${col}"` : `fill="var(--surface)" style="stroke:${col};stroke-width:1.6"`;
+      svg += piece[2] === "prosa"
+        ? `<rect class="pt" data-i="${i}" x="${(x - 5).toFixed(1)}" y="${(y - 5).toFixed(1)}" width="10" height="10" ${paint}/>`
+        : `<circle class="pt" data-i="${i}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" ${paint}/>`;
+    });
+    cl.forEach(c => {
+      const mine = P.filter(q => q.c === c.id);
+      const med = a => a.slice().sort((u, v) => u - v)[Math.floor(a.length / 2)];
+      svg += `<text class="cl" x="${X(med(mine.map(q => q.x))).toFixed(1)}" y="${Y(med(mine.map(q => q.y))).toFixed(1)}" text-anchor="middle" fill="${c.color}">${esc(c.name)}</text>`;
+    });
+    $("#sem").innerHTML = svg + "</svg>";
+    const pts = [...$("#sem").querySelectorAll(".pt")];
+    const firstLine = p => (V.find(v => v[1] === p) || [, , ""])[2];
+    function select(i) {
+      const q = P[i], piece = S.pieces[q.p], b = books[piece[1]];
+      pts.forEach(el => el.classList.toggle("sel", +el.dataset.i === i));
+      const isVerse = piece[2] === "verso";
+      $("#sem-side").innerHTML = `
+        <div class="meta">${esc(cl[q.c].name)} (confianza ${fmt.format(Math.round(100 * (q.conf ?? 1)))} %) · ${esc(b.short)}${b.year ? " (" + b.year + ")" : ""} · ${isVerse ? "verso" : "prosa"}</div>
+        <h4>${esc(piece[0])}</h4>
+        <div class="first">${esc(firstLine(q.p).slice(0, 120))}…</div>
+        ${isVerse ? `<button class="chip act" id="sem-scan">Ver su escansión</button>` : ""}
+        <div class="meta">Las más parecidas</div>
+        <ol>${q.near.map((j, k) => { const o = S.pieces[P[j].p]; return `<li><button data-j="${j}">${esc(o[0])}</button> <small>${esc(books[o[1]].short)} · ${fmt.format(Math.round(q.sim[k] * 100))}</small></li>`; }).join("")}</ol>
+        <div class="meta">Palabras clave del grupo: ${cl[q.c].keywords.slice(0, 8).map(esc).join(", ")}</div>`;
+      $("#sem-side").querySelectorAll("ol button").forEach(bt => bt.onclick = () => select(+bt.dataset.j));
+      const sc = $("#sem-scan");
+      if (sc) sc.onclick = () => { $("#poem").value = q.p; $("#poem").dispatchEvent(new Event("change")); window.atlasGo("escansion"); };
+    }
+    pts.forEach(el => {
+      const i = +el.dataset.i, q = P[i], piece = S.pieces[q.p], b = books[piece[1]];
+      el.dataset.tipped = ""; onTip(el, e => showTip(`<b>${esc(piece[0])}</b><br>${esc(b.short)}${b.year ? " (" + b.year + ")" : ""}<br>${esc(cl[q.c].name)} · confianza ${fmt.format(Math.round(100 * (q.conf ?? 1)))} %`, e));
+      offTip(el);
+      el.addEventListener("click", () => select(i));
+    });
+    const used = [...new Set(P.map(q => S.pieces[q.p][1]))].sort((a, b) => a - b);
+    $("#sem-books").insertAdjacentHTML("beforeend", used.map(b => `<option value="${b}">${esc(books[b].short)}${books[b].year ? " (" + books[b].year + ")" : ""}</option>`).join(""));
+    $("#sem-books").addEventListener("change", e => {
+      const v = e.target.value;
+      pts.forEach(el => el.classList.toggle("dim", v !== "" && S.pieces[P[+el.dataset.i].p][1] !== +v));
+    });
+    const son = P.findIndex(q => S.pieces[q.p][0] === "Sonatina");
+    if (son >= 0) select(son);
+  })();
+
+
+  // ---------- estilo
+  (function estilo() {
+    const ST = S.stylo; if (!ST) return;
+    const order = ST.order, idx = new Map(ST.books.map((b, i) => [b, i]));
+    const post = new Set(ST.posthumous);
+    const vals = ST.delta.flat().filter(v => v > 0), dmin = Math.min(...vals), dmax = Math.max(...vals);
+    const nm = b => `${esc(books[b].short)} (${books[b].year})`;
+    $("#delta").innerHTML = `<colgroup><col class="lab">${order.map(() => "<col>").join("")}</colgroup>` +
+      `<thead><tr><th></th>${order.map(b => `<th class="${post.has(b) ? "post" : ""}"><b>${books[b].year}</b>${esc(books[b].short)}</th>`).join("")}</tr></thead><tbody>` +
+      order.map(a => `<tr><th class="row ${post.has(a) ? "post" : ""}">${nm(a)}</th>` + order.map(b => {
+        if (a === b) return `<td class="none">·</td>`;
+        const v = ST.delta[idx.get(a)][idx.get(b)], t = 1 - (v - dmin) / (dmax - dmin);
+        return `<td class="num ${t > 0.55 ? "dark" : ""}" style="--t:${t.toFixed(3)}" data-tip="<b>${nm(a)}</b><br>y <b>${nm(b)}</b><br>Delta: ${fmt2.format(v)} (menor = más parecidos)">${fmt2.format(v)}</td>`;
+      }).join("") + "</tr>").join("") + "</tbody>";
+    $("#delta").querySelectorAll("td[data-tip]").forEach(td => {
+      td.dataset.tipped = ""; onTip(td, e => showTip(td.dataset.tip, e));
+      offTip(td);
+    });
+    const juv = ST.posthumous.find(b => books[b].short.startsWith("Poemas de juventud"));
+    const near = juv != null ? ST.nearest[juv].map(b => `<i>${esc(books[b].short)}</i>`).join(", ") : "";
+    const sup = (names) => { const hit = (ST.support || []).find(c => c.books.length === names.length && names.every(n => c.books.some(b => b.startsWith(n + " (")))); return hit ? fmt.format(Math.round(100 * hit.support)) + " %" : "—"; };
+    $("#stylo-note").innerHTML = `Los dos libros póstumos (en naranja) se parecen a épocas distintas: <i>Poemas de juventud</i> se agrupa con los libros tempranos, <i>Epístolas y poemas</i> y <i>Abrojos</i> (apoyo del ${sup(["Epístolas y poemas", "Abrojos", "Poemas de juventud"])} en 200 análisis), y <i>Lira póstuma</i> con <i>Poema del otoño</i> (${sup(["Poema del otoño y otros poemas", "Lira póstuma"])}). El grupo más firme es <i>Azul</i> con <i>Prosas profanas</i> (${sup(["Azul", "Prosas profanas"])}). El estilo también ordena los libros en el tiempo (correlación de Spearman ${fmt2.format(ST.dating?.["function words (300)"]?.spearman ?? 0)} entre el orden estimado y el real, evaluando cada libro sin haberlo visto), pero comprime las fechas hacia el centro de la carrera, así que no se dan años: solo se dice a qué época se parece cada póstumo.`;
+
+    const mv = order.map(b => [b, ST.mattr[b]]).sort((a, b) => b[1] - a[1]);
+    const lo = Math.min(...mv.map(x => x[1])) - 0.02, hi = Math.max(...mv.map(x => x[1])) + 0.01;
+    const pos = v => 100 * (v - lo) / (hi - lo);
+    $("#mattr").innerHTML = mv.map(([b, v]) => `
+      <div class="mt"><div class="lab ${post.has(b) ? "post" : ""}">${nm(b)}</div>
+      <div class="track"><div class="stem" style="width:${pos(v)}%"></div><div class="dot ${post.has(b) ? "post" : ""}" style="left:${pos(v)}%"></div><span class="v num" style="left:${pos(v)}%">${fmt3.format(v)}</span></div></div>`).join("");
+  })();
+
+  renderWord($("#q").value);
+})();
+</script>
+
+</body>
+</html>
