@@ -245,11 +245,9 @@ footer h3 { margin: 0; font-family: var(--display); font-size: 22px; color: var(
 .poem-pick { display: grid; gap: 10px; }
 .poem-pick input { font: inherit; font-size: 15px; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: 100%; box-sizing: border-box; }
 .poem-pick input:focus-visible { outline: 2px solid var(--azul); outline-offset: 1px; }
-.book-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
-.book-row .chip { flex: none; }
-.poem-list { list-style: none; margin: 0; padding: 4px; max-height: 236px; overflow-y: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
-  columns: 3 220px; column-gap: 12px; }
-.poem-list li { break-inside: avoid; }
+.book-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.poem-list { list-style: none; margin: 0; padding: 4px; max-height: 236px; overflow-y: auto; overflow-x: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 0 12px; align-content: start; }
 .poem-list button { all: unset; cursor: pointer; display: block; box-sizing: border-box; width: 100%; padding: 5px 8px; border-radius: 7px; font-size: 14px; line-height: 1.3; color: var(--ink-2); }
 .poem-list button small { display: block; color: var(--muted); font-size: 12px; }
 .poem-list button:hover { background: var(--oro-wash); color: var(--ink); }
@@ -337,7 +335,7 @@ mark { background: var(--oro-wash); color: inherit; border-radius: 3px; padding:
 .rb .ws button.abs { color: var(--c2); }
 
 /* Referencias */
-.net, .map { overflow-x: auto; }
+.net, .map { overflow: hidden; }
 .net svg, .map svg { width: 100%; height: auto; display: block; }
 .net line { stroke: var(--line); }
 .net line.on { stroke: var(--oro); stroke-width: 2; }
@@ -371,6 +369,21 @@ mark { background: var(--oro-wash); color: inherit; border-radius: 3px; padding:
 
 /* Estilo */
 .heat.delta td { height: 40px; }
+@media (max-width: 640px) {
+  .heat-scroll { overflow: visible; padding: 14px; }
+  table.heat { min-width: 0; display: block; border-spacing: 0; }
+  table.heat colgroup { display: none; }
+  table.heat thead, table.heat tbody { display: block; }
+  table.heat tr { display: grid; grid-template-columns: repeat(var(--n, 10), minmax(0, 1fr)); gap: 2px; margin-bottom: 2px; }
+  table.heat th.row, .heat.delta th.row { grid-column: 1 / -1; text-align: left; padding: 8px 0 3px; font-size: 15px; white-space: normal; }
+  table.heat thead th:first-child { display: none; }
+  table.heat thead th { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; height: 104px; font-size: 10px; line-height: 1.15; padding: 0 0 0 2px; overflow: hidden; }
+  table.heat thead th b { display: inline; margin-inline-end: .45em; }
+  table.heat.meter thead th { writing-mode: horizontal-tb; transform: none; height: auto; text-align: center; padding-bottom: 4px; }
+  table.heat.meter thead th b { display: block; margin: 0; }
+  table.heat td { height: 30px; font-size: 10px; padding: 0; min-width: 0; overflow: hidden; }
+  .heat.delta td { height: 30px; }
+}
 .heat.delta th.row { font-family: var(--text); font-size: 13px; cursor: default; white-space: normal; line-height: 1.25; }
 .heat.delta th.row.post, .heat.delta th .post { color: var(--c2); }
 .heat.delta col.lab { width: 200px; }
@@ -514,8 +527,7 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
   .rb { grid-template-columns: minmax(0, 1fr); }
   .rb .lab { text-align: left; }
   .sem-wrap { grid-template-columns: minmax(0, 1fr); }
-  .net svg { min-width: 680px; }
-  .map svg { min-width: 640px; }
+
   .mt { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .mt .lab { text-align: left; }
 }
@@ -933,6 +945,10 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
       n.focus(); n.click();
     });
   });
+
+  // heat tables: number of cell columns, for the phone layout
+  const setHeatCols = t => { const r = t.querySelector("tbody tr"); if (r) t.style.setProperty("--n", r.querySelectorAll("td").length); };
+  document.querySelectorAll("table.heat").forEach(t => { setHeatCols(t); new MutationObserver(() => setHeatCols(t)).observe(t, { childList: true }); });
 
   // long explanations: keep the first sentence, fold the rest
   document.querySelectorAll("section.view:not(#inicio):not(#metodo) .sec-head > p, section.view .sub > p").forEach(p => {
@@ -1563,8 +1579,6 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
       if ($("#poem-q").value.trim()) return;
       curBook = bi;
       $("#poem-books").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", +c.dataset.b === bi));
-      const pressed = $("#poem-books").querySelector('[aria-pressed="true"]');
-      if (pressed) $("#poem-books").scrollLeft = pressed.offsetLeft - $("#poem-books").offsetLeft - 8;
       const g = groups.find(x => x.bi === bi);
       $("#poem-list").innerHTML = listHTML((g ? g.ps : []).map(q => ({ p: q })));
       const cur = $("#poem-list").querySelector('[aria-current="true"]');
@@ -1801,39 +1815,64 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     $("#ref-tabs").querySelectorAll(".chip").forEach(b => b.onclick = () => showCat(b.dataset.c));
     showCat(cats[0]);
 
-    // network (layout computed in Python with networkx)
-    const G = RF.graph, Wd = 900, H = 620, pad = 46;
-    const xs = G.nodes.map(n => n.x), ys = G.nodes.map(n => n.y);
-    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-    const X = x => pad + (x - x0) / (x1 - x0) * (Wd - 2 * pad), Y = y => pad + (y1 - y) / (y1 - y0) * (H - 2 * pad);
-    const pos = new Map(G.nodes.map(n => [n.name, [X(n.x), Y(n.y)]]));
-    const wmax = Math.max(...G.edges.map(e => e[2]));
+    // network (layout computed in Python with networkx). Drawn for the
+    // width it has: on a phone the layout is turned to portrait, labels are
+    // enlarged to stay legible and only the most cited names keep a label
+    // (every name is in its tooltip).
+    const G = RF.graph;
     const nb = new Map(G.nodes.map(n => [n.name, new Set()]));
     G.edges.forEach(([a, b]) => { nb.get(a).add(b); nb.get(b).add(a); });
-    const rad = name => 4 + Math.sqrt(ent.get(name).pieces.length) * 2.2;
-    let svg = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Red de nombres que aparecen juntos">`;
-    G.edges.forEach(([a, b, w], i) => {
-      const [ax, ay] = pos.get(a), [bx, by] = pos.get(b);
-      svg += `<line data-a="${esc(a)}" data-b="${esc(b)}" x1="${ax.toFixed(1)}" y1="${ay.toFixed(1)}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" stroke-width="${(0.6 + 2.4 * w / wmax).toFixed(2)}"/>`;
-    });
-    G.nodes.forEach(n => {
-      const [x, y] = pos.get(n.name), e = ent.get(n.name), r = rad(n.name);
-      svg += `<g data-n="${esc(n.name)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" style="fill:var(${catColor[e.cat]})"/>` +
-        `<text x="${x.toFixed(1)}" y="${(y + r + 12).toFixed(1)}" text-anchor="middle">${esc(n.name)}</text></g>`;
-    });
-    $("#net").innerHTML = svg + "</svg>";
-    const lines = [...$("#net").querySelectorAll("line")], groups = [...$("#net").querySelectorAll("g")];
-    groups.forEach(g => {
-      const name = g.dataset.n, e = ent.get(name);
-      g.addEventListener("pointerenter", () => {
-        const keep = nb.get(name);
-        groups.forEach(o => o.classList.toggle("dim", o.dataset.n !== name && !keep.has(o.dataset.n)));
-        lines.forEach(l => { const on = l.dataset.a === name || l.dataset.b === name; l.classList.toggle("on", on); l.classList.toggle("dim", !on); });
+    const wmax = Math.max(...G.edges.map(e => e[2]));
+    const avail = el => el.clientWidth || ($("main.content")?.clientWidth || window.innerWidth) - 60;
+    let netW = 0;
+    function drawNet() {
+      const cw = avail($("#net"));
+      if (!cw || Math.abs(cw - netW) < 8) return;
+      netW = cw;
+      const portrait = cw < 600;
+      const Wd = portrait ? 620 : 900, H = portrait ? 900 : 620, pad = portrait ? 60 : 46;
+      const s = Wd / cw;                                  // viewBox units per screen pixel
+      const fs = Math.max(11.5, 11 * s), grow = portrait ? Math.min(1.9, s * 0.75) : 1;
+      const xs = G.nodes.map(n => portrait ? n.y : n.x), ys = G.nodes.map(n => portrait ? -n.x : n.y);
+      const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+      const X = x => pad + (x - x0) / (x1 - x0) * (Wd - 2 * pad), Y = y => pad + (y1 - y) / (y1 - y0) * (H - 2 * pad);
+      const pos = new Map(G.nodes.map((n, i) => [n.name, [X(xs[i]), Y(ys[i])]]));
+      const rad = name => (4 + Math.sqrt(ent.get(name).pieces.length) * 2.2) * grow;
+      let svg = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Red de nombres que aparecen juntos">`;
+      G.edges.forEach(([a, b, w]) => {
+        const [ax, ay] = pos.get(a), [bx, by] = pos.get(b);
+        svg += `<line data-a="${esc(a)}" data-b="${esc(b)}" x1="${ax.toFixed(1)}" y1="${ay.toFixed(1)}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" stroke-width="${((0.6 + 2.4 * w / wmax) * Math.max(1, grow * 0.8)).toFixed(2)}"/>`;
       });
-      g.dataset.tipped = ""; onTip(g, ev => showTip(tipFor(e) + `<br>Comparte poemas con: ${[...nb.get(name)].map(esc).join(", ")}`, ev));
-      g.addEventListener("mouseleave", () => { hideTip(); groups.forEach(o => o.classList.remove("dim")); lines.forEach(l => l.classList.remove("on", "dim")); });
-      g.addEventListener("click", () => openWord(query(e)));
-    });
+      // labels: most cited first, skipped where they would overlap another
+      const boxes = [], labelled = new Set();
+      const dots = G.nodes.map(n => { const [x, y] = pos.get(n.name), r = rad(n.name); return [n.name, x - r, y - r, 2 * r, 2 * r]; });
+      [...G.nodes].sort((a, b) => ent.get(b.name).pieces.length - ent.get(a.name).pieces.length).forEach(n => {
+        const [x, y] = pos.get(n.name), r = rad(n.name), w = 0.58 * fs * n.name.length, h = fs * 1.15;
+        const bx = x - w / 2, by = y + r + 2;
+        const hit = ([ox, oy, ow, oh]) => bx < ox + ow && ox < bx + w && by < oy + oh && oy < by + h;
+        if (by + h > H || boxes.some(hit) || dots.some(([m, ...d]) => m !== n.name && hit(d))) return;
+        boxes.push([bx, by, w, h]); labelled.add(n.name);
+      });
+      G.nodes.forEach(n => {
+        const [x, y] = pos.get(n.name), e = ent.get(n.name), r = rad(n.name);
+        svg += `<g data-n="${esc(n.name)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" style="fill:var(${catColor[e.cat]});stroke-width:${(1.5 * Math.max(1, grow * 0.8)).toFixed(1)}"/>` +
+          (labelled.has(n.name) ? `<text x="${x.toFixed(1)}" y="${(y + r + fs).toFixed(1)}" text-anchor="middle" style="font-size:${fs.toFixed(1)}px">${esc(n.name)}</text>` : "") + `</g>`;
+      });
+      $("#net").innerHTML = svg + "</svg>";
+      const lines = [...$("#net").querySelectorAll("line")], groups = [...$("#net").querySelectorAll("g")];
+      groups.forEach(g => {
+        const name = g.dataset.n, e = ent.get(name);
+        g.addEventListener("pointerenter", () => {
+          const keep = nb.get(name);
+          groups.forEach(o => o.classList.toggle("dim", o.dataset.n !== name && !keep.has(o.dataset.n)));
+          lines.forEach(l => { const on = l.dataset.a === name || l.dataset.b === name; l.classList.toggle("on", on); l.classList.toggle("dim", !on); });
+        });
+        g.dataset.tipped = ""; onTip(g, ev => showTip(tipFor(e) + `<br>Comparte poemas con: ${[...nb.get(name)].map(esc).join(", ")}`, ev));
+        g.addEventListener("mouseleave", () => { hideTip(); groups.forEach(o => o.classList.remove("dim")); lines.forEach(l => l.classList.remove("on", "dim")); });
+        g.addEventListener("click", () => openWord(query(e)));
+      });
+    }
+    drawNet();
 
     // map: equirectangular, land outline from TopoJSON decoded here
     let topo;
@@ -1858,7 +1897,13 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     })));
     const places = RF.entities.filter(e => e.coords).sort((a, b) => b.n - a.n);
     const MW = 900;
-    function drawMap(v) {
+    let mapView = null, mapW = 0;
+    function drawMap(v, force = true) {
+      const cw = avail($("#map"));
+      if (!cw || (!force && v === mapView && Math.abs(cw - mapW) < 8)) return;
+      mapView = v; mapW = cw;
+      const sc = MW / cw;                                  // viewBox units per screen pixel
+      const fs = Math.max(11, 10.5 * sc), grow = Math.max(1, sc * 0.55);
       $("#map-tabs").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.v === v.id));
       const [LON0, LON1] = v.lon, [LAT0, LAT1] = v.lat;
       // equirectangular, with the horizontal scale shrunk by cos(mid-latitude)
@@ -1867,7 +1912,7 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
       const MH = MW * (LAT1 - LAT0) / ((LON1 - LON0) * k);
       const px = lon => (lon - LON0) / (LON1 - LON0) * MW, py = lat => (LAT1 - lat) / (LAT1 - LAT0) * MH;
       const zoom = v.id === "mundo" ? 1 : 1.25;
-      const rad = e => (3 + Math.sqrt(e.n) * 2.6) * zoom;
+      const rad = e => (3 + Math.sqrt(e.n) * 2.6) * zoom * grow;
       let d = "";
       rings.forEach(pts => { d += "M" + pts.map(([lo, la]) => px(lo).toFixed(1) + " " + py(la).toFixed(1)).join("L") + "Z"; });
       const inView = e => { const x = px(e.coords[1]), y = py(e.coords[0]); return x >= 0 && x <= MW && y >= 0 && y <= MH; };
@@ -1881,12 +1926,12 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
       const boxes = [];
       let labels = "";
       shown.forEach(e => {
-        const x = px(e.coords[1]), y = py(e.coords[0]), r = rad(e), w = 6.2 * e.name.length + 6, h = 13;
+        const x = px(e.coords[1]), y = py(e.coords[0]), r = rad(e), w = 0.58 * fs * e.name.length + 4, h = fs * 1.2;
         for (const [bx, by] of [[x + r + 3, y - h / 2], [x - r - 3 - w, y - h / 2], [x - w / 2, y - r - h - 1], [x - w / 2, y + r + 1]]) {
           if (bx < 0 || bx + w > MW || by < 0 || by + h > MH) continue;
           if (!boxes.some(([ox, oy, ow, oh]) => bx < ox + ow && ox < bx + w && by < oy + oh && oy < by + h)) {
             boxes.push([bx, by, w, h]);
-            const t = `x="${bx.toFixed(1)}" y="${(by + h - 3).toFixed(1)}"`;
+            const t = `x="${bx.toFixed(1)}" y="${(by + h * 0.78).toFixed(1)}" style="font-size:${fs.toFixed(1)}px${sc > 1.5 ? ";stroke-width:" + (3 * sc / 1.5).toFixed(1) + "px" : ""}"`;
             labels += `<text class="halo" ${t}>${esc(e.name)}</text><text ${t}>${esc(e.name)}</text>`;
             break;
           }
@@ -1903,6 +1948,12 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     $("#map-tabs").innerHTML = VIEWS.map(v => `<button class="chip" data-v="${v.id}">${v.label}</button>`).join("");
     $("#map-tabs").querySelectorAll(".chip").forEach(c => c.onclick = () => drawMap(VIEWS.find(v => v.id === c.dataset.v)));
     drawMap(VIEWS[0]);
+    // redraw for the width actually available: on resize, and when a hidden
+    // tab is shown (a hidden panel has no width when first drawn)
+    let rt;
+    const redraw = () => { clearTimeout(rt); rt = setTimeout(() => { drawNet(); drawMap(mapView, false); }, 120); };
+    window.addEventListener("resize", redraw);
+    window.addEventListener("hashchange", redraw);
   })();
 
 
