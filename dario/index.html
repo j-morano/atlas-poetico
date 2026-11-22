@@ -242,6 +242,24 @@ footer h3 { margin: 0; font-family: var(--display); font-size: 22px; color: var(
 .keys span { display: inline-flex; align-items: center; gap: 6px; }
 .keys i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
 .picker { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.poem-pick { display: grid; gap: 10px; }
+.poem-pick input { font: inherit; font-size: 15px; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: 100%; box-sizing: border-box; }
+.poem-pick input:focus-visible { outline: 2px solid var(--azul); outline-offset: 1px; }
+.book-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.book-row .chip { flex: none; }
+.poem-list { list-style: none; margin: 0; padding: 4px; max-height: 236px; overflow-y: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+  columns: 3 220px; column-gap: 12px; }
+.poem-list li { break-inside: avoid; }
+.poem-list button { all: unset; cursor: pointer; display: block; box-sizing: border-box; width: 100%; padding: 5px 8px; border-radius: 7px; font-size: 14px; line-height: 1.3; color: var(--ink-2); }
+.poem-list button small { display: block; color: var(--muted); font-size: 12px; }
+.poem-list button:hover { background: var(--oro-wash); color: var(--ink); }
+.poem-list button[aria-current="true"] { background: var(--azul); color: var(--surface); }
+.poem-list button[aria-current="true"] small { color: inherit; opacity: .8; }
+.poem-list button:focus-visible { outline: 2px solid var(--azul); }
+.poem-list .empty { padding: 8px; color: var(--muted); font-size: 14px; }
+.poem-now { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; margin-top: 6px; }
+.poem-now h3 { margin: 0; font-family: var(--display); font-size: 26px; font-weight: 600; line-height: 1.1; text-wrap: balance; }
+.scan li { cursor: pointer; }
 .picker select { font: inherit; font-size: 15px; padding: 7px 12px; border-radius: 10px; border: 1px solid var(--line);
   background: var(--surface); color: var(--ink); max-width: 100%; min-width: 0; }
 .scan-meta { font-size: 13.5px; color: var(--ink-2); }
@@ -329,7 +347,9 @@ mark { background: var(--oro-wash); color: inherit; border-radius: 3px; padding:
 .net line.dim { opacity: .15; }
 .map .land { fill: var(--line); stroke: none; }
 .map text { font-family: var(--text); font-size: 11px; fill: var(--ink); pointer-events: none; }
+.map svg { overflow: hidden; }
 .map circle { fill: var(--c5); fill-opacity: .8; }
+.map text.halo { stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
 .map circle:hover { fill-opacity: 1; stroke: var(--ink); }
 
 /* Mapa semántico */
@@ -648,6 +668,20 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
       <div class="panel stacks" id="rhyme"></div>
     </div>
 
+    <div class="sub" data-slug="terminaciones">
+      <h3>Rimas llanas, agudas y esdrújulas</h3>
+      <p>Los versos que riman, según dónde lleva el acento su última palabra: llana (<i>princesa</i>), aguda (<i>corazón</i>) o esdrújula (<i>lágrimas</i>). La rima llana es la normal en español; la aguda pesa más en los primeros libros (un tercio de las rimas en <i>Abrojos</i>) que en <i>Azul</i> y <i>Prosas profanas</i>, y la esdrújula es rara en toda la obra.</p>
+      <div class="keys" id="rend-keys"></div>
+      <div class="panel stacks" id="rend"></div>
+    </div>
+
+    <div class="sub" data-slug="vocales">
+      <h3>Las vocales de la rima</h3>
+      <p>Las vocales que sostienen la rima: la acentuada y la última, que son las que cuentan en la asonancia (<i>princesa</i> y <i>tristeza</i> riman en é-a; en las esdrújulas no cuenta la vocal de en medio: <i>lágrimas</i>, á-a). Porcentaje de los versos que riman. Pulsa una barra para buscar sus palabras de rima más frecuentes en el explorador.</p>
+      <div class="chips" id="rvow-tabs" role="group" aria-label="Libro"></div>
+      <div class="panel" id="rvow"></div>
+    </div>
+
   </section>
 
   <section id="escansion" class="view" hidden>
@@ -655,10 +689,17 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
       <div class="eyebrow">Verso · Escansión</div>
       <h2>Escansión de un poema</h2>
     </div>
-      <p>Elige un poema para ver la medida de cada verso, sus acentos (círculos llenos) y la letra de su rima. Toca o pasa el cursor por un verso para resaltar los que riman con él.</p>
-      <div class="picker">
-        <select id="poem" aria-label="Poema"></select>
-        <span class="scan-meta" id="scan-meta"></span>
+      <p>Elige un poema para ver la medida de cada verso, sus acentos (círculos llenos), sus licencias y la letra de su rima. Pulsa un verso para resaltar los que riman con él.</p>
+      <div class="poem-pick">
+        <input type="search" id="poem-q" placeholder="Busca por título o por un verso" aria-label="Buscar poema" autocomplete="off">
+        <div class="book-row" id="poem-books" role="group" aria-label="Libro"></div>
+        <ul class="poem-list" id="poem-list" aria-label="Poemas"></ul>
+        <select id="poem" aria-hidden="true" tabindex="-1" hidden></select>
+      </div>
+      <div class="poem-now">
+        <button class="chip" id="poem-prev" aria-label="Poema anterior">←</button>
+        <div><h3 id="poem-title"></h3><span class="scan-meta" id="scan-meta"></span></div>
+        <button class="chip" id="poem-next" aria-label="Poema siguiente">→</button>
       </div>
       <div class="panel"><ul class="scan" id="scan"></ul></div>
   </section>
@@ -667,7 +708,7 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     <div class="sec-head">
       <div class="eyebrow">Verso · Licencias</div>
       <h2>Las licencias del verso</h2>
-      <p>Para que un verso tenga la medida que pide el poema, el poeta puede juntar o separar vocales: la <b>sinéresis</b> une en una sílaba dos vocales de una palabra (<i>poe-sí-a</i>), la <b>dialefa</b> separa las de dos palabras que normalmente se unirían (<i>de | oro</i>) y la <b>diéresis</b> parte un diptongo (<i>su-a-ve</i>). Cada verso se lee primero con su pronunciación natural: sinalefa entre palabras, hiato entre dos vocales fuertes de una palabra (<i>po-e-ta</i>) y diptongos enteros. Solo cuando esa lectura no da la medida del poema se busca la combinación de licencias más natural que sí la da: la dialefa es más fácil junto a una vocal acentuada o tras una pausa, la sinéresis entre vocales átonas, y la diéresis es la más rara, salvo en grafías de la época como <i>oir</i> o <i>reir</i>. La medida del poema se deduce de sus propios versos y, en las estrofas que repiten una forma (7-7-11…), de la posición de cada verso. Los versos que ninguna lectura razonable ajusta se marcan como irregulares, y los poemas sin medida dominante (verso libre) se leen sin licencias.</p>
+      <p>Para que un verso tenga la medida que pide el poema, el poeta puede juntar o separar vocales: la <b>sinéresis</b> une en una sílaba dos vocales de una palabra (<i>poe-sí-a</i>), la <b>dialefa</b> separa las de dos palabras que normalmente se unirían (<i>de | oro</i>) y la <b>diéresis</b> parte un diptongo (<i>su-a-ve</i>). Cada verso se lee primero con su pronunciación natural, y solo si esa lectura no da la medida del poema se busca la combinación de licencias más natural que sí la da. La medida del poema se deduce de sus propios versos y, en las estrofas que repiten una forma (7-7-11…), de la posición de cada verso. Las reglas siguen a los tratadistas (Bello, Navarro Tomás, Domínguez Caparrós) y a los estudios sobre el contacto de vocales. Entre palabras, la sinalefa es la norma; la dialefa es más natural cuando la segunda vocal es tónica (<i>de | oro</i>) o lo son las dos, o tras una pausa, y más rara con palabras gramaticales (<i>de</i>, <i>la</i>, <i>que</i>) o vocales iguales. Dentro de una palabra, dos vocales fuertes forman hiato (<i>po-e-ta</i>, <i>le-ón</i>) salvo tras el acento, donde se unen (<i>áu-reo</i>, <i>hé-roe</i>); palabras como <i>día</i>, <i>río</i> o <i>aún</i> se cuentan de las dos maneras, según pida el verso. La diéresis apenas es licencia en palabras de hiato etimológico (<i>cru-el</i>, <i>vi-a-je</i>, <i>su-a-ve</i>, <i>ru-i-do</i>) y casi imposible en <i>cielo</i> o <i>puerta</i>; <i>oír</i> y <i>reír</i> son siempre de dos sílabas. La y de <i>hoy</i>, <i>voy</i> o <i>muy</i> ante vocal puede unirse o no a ella, y la conjunción y entre vocales abre la sílaba siguiente (<i>tie-rra | y el cie-lo</i>); en ambos casos decide la medida. Entre lecturas del mismo coste se prefiere la de acentos propios del metro (6.ª, o 4.ª y 8.ª, en el endecasílabo). Los versos que ninguna lectura razonable ajusta se marcan como irregulares, y los poemas sin medida dominante (verso libre) se leen sin licencias.</p>
     </div>
     <div class="sub" data-slug="por-libro">
       <h3>Las licencias de cada libro</h3>
@@ -757,7 +798,8 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     </div>
     <div class="sub" data-slug="mapa">
       <h3>El mapa</h3>
-      <p>Lugares nombrados, con el tamaño según las menciones. Continentes y países se sitúan en un punto central.</p>
+      <p>Lugares nombrados, con el tamaño según las menciones. Continentes y países se sitúan en un punto central. Acerca el mapa a América o a Europa y el Mediterráneo para separar los lugares cercanos.</p>
+      <div class="chips" id="map-tabs" role="group" aria-label="Zona del mapa"></div>
       <div class="panel map" id="map"></div>
     </div>
   </section>
@@ -809,7 +851,7 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     <p>Las rarezas se miden frente a Google Books Ngram (español, versión de 2020): frecuencias de 1880–1920 para la época de Darío y de 2000–2019 para hoy, de la misma fuente. Los libros del siglo XIX se digitalizaron por OCR, así que las palabras muy raras pueden llevar algo de ruido.</p>
     <p>El mapa semántico usa el modelo BAAI/bge-m3: cada pieza se divide en fragmentos de unas 120 palabras, se promedian sus vectores y se resta la media del corpus (sin ese centrado, las piezas largas quedaban cerca de todo). Se eligió entre tres modelos con una prueba de validez: las series que Darío compuso como unidad (El año lírico, los Medallones, Los cisnes, las Rimas, los Abrojos) deben quedar juntas. bge-m3 las recupera unas 3,5 veces mejor que el azar. Las regiones salen de un agrupamiento de consenso (k-means sobre UMAP en 30 ejecuciones); la confianza de cada pieza es la proporción de ejecuciones en que coincide con su región. La región «Sátira y vida humilde» reúne sobre todo los Abrojos, y su brevedad probablemente pesa tanto como su tema.</p>
     <p>El contorno del mapa es de Natural Earth (dominio público), vía el paquete world-atlas.</p>
-    <p>La métrica y la rima se han calculado con Rantanplan (proyecto POSTDATA, LINHD-UNED). Antes de medir, las rayas (—) se sustituyen por espacios, porque una raya pegada a dos palabras («princesa,—dice») hacía que se perdieran ambas; las elisiones se escriben enteras (d'ella → de ella, que mide igual por sinalefa), y las dedicatorias impresas al comienzo de un poema no se miden. Los alejandrinos y dodecasílabos se miden por hemistiquios: se prueba cada límite de palabra como cesura y se acepta solo si las dos mitades miden exactamente 7+7 (o 6+6). Las licencias se deciden en contexto: cada verso se lee primero con su pronunciación natural (sinalefa entre palabras, hiato entre vocales fuertes dentro de una palabra, diptongos enteros); si no da la medida del poema, se elige la combinación de sinéresis, dialefas y diéresis de menor coste que sí la da, con costes tomados de las descripciones de Navarro Tomás, Quilis y Domínguez Caparrós. La medida del poema es el menor conjunto de medidas (hasta tres) que explica el 80 % de sus versos, y en estrofas que repiten forma, la de cada posición; los poemas sin medida dominante se leen sin licencias. Las citas de otros autores que encabezan algunos poemas (epígrafes) no se cuentan en ningún análisis. Validación: 99,8 % de acierto en sílabas (IC 95 %: 99,5–99,9) en 2.000 versos del Corpus de Sonetos del Siglo de Oro revisados a mano (Navarro-Colorado et al., 2016), y 100 % (99,4–100) en 600 versos de poemas de Darío de metro conocido y uniforme. Como el método usa la medida del poema, estas pruebas no dicen si la licencia elegida es la correcta; para eso hay una muestra de 150 versos con licencia pendiente de revisión manual. Se comprueba verso a verso que no falte ninguna palabra: solo quedan 36 versos con alguna sin medir, casi todos en francés. En dos pasajes (12 versos) no pudo analizarse la rima y solo se midió el verso.</p>
+    <p>La métrica y la rima se han calculado con Rantanplan (proyecto POSTDATA, LINHD-UNED). Antes de medir, las rayas (—) se sustituyen por espacios, porque una raya pegada a dos palabras («princesa,—dice») hacía que se perdieran ambas; las elisiones se escriben enteras (d'ella → de ella, que mide igual por sinalefa), y las dedicatorias impresas al comienzo de un poema no se miden. Los alejandrinos y dodecasílabos se miden por hemistiquios: se prueba cada límite de palabra como cesura y se acepta solo si las dos mitades miden exactamente 7+7 (o 6+6). Las licencias se deciden en contexto: cada verso se lee primero con su pronunciación natural; si no da la medida del poema, se elige la combinación de sinéresis, dialefas y diéresis de menor coste que sí la da, y entre lecturas del mismo coste la de acentos más propios del metro. Los costes siguen a Bello, Navarro Tomás y Domínguez Caparrós («Para el estudio de la diéresis métrica», 2004; «Prosodia rítmica de vocales contiguas en interior de palabra», 2012), a los estudios de Esgueva (2004) y Aguilar (2006) sobre el contacto de vocales entre palabras, y a los sistemas libEscansión (2024) y Jumper (2021). La medida del poema es el menor conjunto de medidas (hasta tres) que explica el 80 % de sus versos, y en estrofas que repiten forma, la de cada posición; los poemas sin medida dominante se leen sin licencias. Las citas de otros autores que encabezan algunos poemas (epígrafes) no se cuentan en ningún análisis. Validación: 99,8 % de acierto en sílabas (IC 95 %: 99,5–99,9) en 2.000 versos del Corpus de Sonetos del Siglo de Oro revisados a mano (Navarro-Colorado et al., 2016), y 100 % (99,4–100) en 600 versos de poemas de Darío de metro conocido y uniforme. Como el método usa la medida del poema, estas pruebas no dicen si la licencia elegida es la correcta; para eso hay una muestra de 150 versos con licencia pendiente de revisión manual. Se comprueba verso a verso que no falte ninguna palabra: solo quedan 36 versos con alguna sin medir, casi todos en francés. En dos pasajes (12 versos) no pudo analizarse la rima y solo se midió el verso.</p>
     <p>Los diez libros principales se ordenan por la fecha de su primera edición. <i>Lira póstuma</i> (1919) y <i>Poemas de juventud</i> (1923) son recopilaciones póstumas; <i>Azul</i> es sobre todo prosa.</p>
       <h3 class="lic-h">Fuentes y licencias</h3>
       <p><b>Textos de Rubén Darío.</b> De dominio público (Darío murió en 1916). Proceden del corpus <i>Literatur</i>, que los toma de ediciones de época: Project Gutenberg, Wikisource, Internet Archive, Biblioteca Virtual Miguel de Cervantes y Memoria Chilena.</p>
@@ -828,12 +870,6 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
 (function router() {
   const ROUTES = [
     { id: "inicio", title: "Inicio", group: null },
-    { id: "explorador", title: "Explorador", group: "Palabras", find: "Busca cualquier palabra: cuántas veces aparece en cada libro y en qué versos." },
-    { id: "vocabulario", title: "Vocabulario", group: "Palabras", find: "Luz, alma y oro encabezan sus sustantivos; divino, sus adjetivos." },
-    { id: "motivos", title: "Motivos", group: "Palabras", find: "El cisne y la princesa culminan en Prosas profanas; Dios y el alma, en Lira póstuma." },
-    { id: "distintivas", title: "Palabras distintivas", group: "Palabras", find: "Las palabras que caracterizan cada libro, contadas por piezas y no por apariciones." },
-    { id: "rarezas", title: "Rarezas", group: "Palabras", find: "Frente a los libros de su tiempo, lo raro es lo nicaragüense, la mitología y los neologismos." },
-    { id: "zipf", title: "Ley de Zipf", group: "Palabras", find: "Más de la mitad de las formas aparece una sola vez." },
     { id: "metrica", title: "Métrica", group: "Verso", find: "Del octosílabo de Abrojos al alejandrino de Prosas profanas; la rima consonante pasa del 50 al 85 %." },
     { id: "escansion", title: "Escansión de un poema", group: "Verso", find: "Cada verso medido, con sus acentos y su rima." },
     { id: "licencias", title: "Licencias", group: "Verso", find: "Sinéresis, dialefas y diéresis: cuándo junta o separa vocales para dar la medida." },
@@ -841,6 +877,12 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     { id: "referencias", title: "Referencias", group: "Imaginario", find: "Venus, Cristo y Víctor Hugo, en red y en un mapa que va del Momotombo a Kioto." },
     { id: "semantico", title: "Mapa semántico", group: "Imaginario", find: "Cuatro regiones temáticas que forman un continuo." },
     { id: "estilo", title: "Estilometría", group: "Estilo", find: "Poemas de juventud se parece a los libros tempranos; el estilo ordena los libros en el tiempo." },
+    { id: "explorador", title: "Explorador", group: "Palabras", find: "Busca cualquier palabra: cuántas veces aparece en cada libro y en qué versos." },
+    { id: "vocabulario", title: "Vocabulario", group: "Palabras", find: "Luz, alma y oro encabezan sus sustantivos; divino, sus adjetivos." },
+    { id: "motivos", title: "Motivos", group: "Palabras", find: "El cisne y la princesa culminan en Prosas profanas; Dios y el alma, en Lira póstuma." },
+    { id: "distintivas", title: "Palabras distintivas", group: "Palabras", find: "Las palabras que caracterizan cada libro, contadas por piezas y no por apariciones." },
+    { id: "rarezas", title: "Rarezas", group: "Palabras", find: "Frente a los libros de su tiempo, lo raro es lo nicaragüense, la mitología y los neologismos." },
+    { id: "zipf", title: "Ley de Zipf", group: "Palabras", find: "Más de la mitad de las formas aparece una sola vez." },
     { id: "metodo", title: "Cómo se hizo", group: "Acerca del atlas", find: "Fuentes, herramientas y validación de cada análisis." },
   ];
   const $ = (q, el = document) => el.querySelector(q);
@@ -1437,6 +1479,36 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
         return { label: `${books[b].short} (${books[b].year})`, sub: `${fmt.format(rows.length)} versos`, counts };
       }));
 
+    // rhyme endings and rhyme vowels (rhymed lines only)
+    const rhymed = M.filter(r => r[4] && r[4] !== "-" && r[4] !== "?" && r[11]);
+    const ENDS = [["l", "llana", "--c1"], ["a", "aguda", "--c2"], ["e", "esdrújula", "--c3"]];
+    stacks($("#rend"), $("#rend-keys"), ENDS.map(([, l, c]) => ({ label: l, color: c })),
+      main.map(b => {
+        const rows = rhymed.filter(r => S.pieces[r[0]][1] === b);
+        const counts = [0, 0, 0];
+        rows.forEach(r => counts["lae".indexOf(r[11])]++);
+        return { label: `${books[b].short} (${books[b].year})`, sub: `${fmt.format(rows.length)} versos que riman`, counts, n: rows.length };
+      }).filter(r => r.n >= 40));
+    const lastWord = t => { const m = t.toLowerCase().match(/\p{L}+/gu); return m ? m[m.length - 1] : ""; };
+    function showVowels(b) {
+      $("#rvow-tabs").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.b === String(b)));
+      const rows = b === "all" ? rhymed : rhymed.filter(r => S.pieces[r[0]][1] === +b);
+      const by = new Map();
+      rows.forEach(r => { if (!by.has(r[12])) by.set(r[12], new Map()); const w = lastWord(r[6]), m = by.get(r[12]); m.set(w, (m.get(w) || 0) + 1); });
+      const top = [...by].map(([v, ws]) => [v, 100 * [...ws.values()].reduce((a, c) => a + c, 0) / rows.length,
+        [...ws].sort((a, c) => c[1] - a[1]).slice(0, 6).map(x => x[0])]).sort((a, c) => c[1] - a[1]).slice(0, 15);
+      hbars($("#rvow"), top, {
+        fmt: v => fmt1.format(v) + " %",
+        tip: r => `<b>${esc(r[0])}</b><br>${fmt1.format(r[1])} % de los versos que riman<br>${r[2].map(esc).join(", ")}…`,
+        word: r => r[2].join(", "),
+      });
+    }
+    $("#rvow-tabs").innerHTML = `<button class="chip" data-b="all">Toda la obra</button>` +
+      main.filter(b => rhymed.filter(r => S.pieces[r[0]][1] === b).length >= 40)
+        .map(b => `<button class="chip" data-b="${b}">${esc(books[b].short)}</button>`).join("");
+    $("#rvow-tabs").addEventListener("click", e => { const c = e.target.closest(".chip"); if (c) showVowels(c.dataset.b); });
+    showVowels("all");
+
     // poem scansion
     const LICN = { s: "sinéresis", d: "dialefa", e: "diéresis" };
     const byPiece = new Map();
@@ -1461,15 +1533,61 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
           `<span class="rh ${r[5]}" title="${r[5] === "c" ? "rima consonante" : r[5] === "a" ? "rima asonante" : ""}">${letter}</span></li>`;
       }).join("");
       const lis = [...$("#scan").children];
-      lis.forEach(li => {
-        li.addEventListener("pointerenter", () => {
-          const k = li.dataset.k;
-          if (k.endsWith(":")) return;
-          lis.forEach(o => o.classList.toggle("hl", o.dataset.k === k));
-        });
-        li.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") lis.forEach(o => o.classList.remove("hl")); });
-      });
+      let on = null;
+      lis.forEach(li => li.addEventListener("click", () => {
+        const k = li.dataset.k;
+        on = (k.endsWith(":") || on === k) ? null : k;
+        lis.forEach(o => o.classList.toggle("hl", on !== null && o.dataset.k === on));
+      }));
+      // picker state
+      $("#poem-title").textContent = S.pieces[p][0];
+      const bi = S.pieces[p][1];
+      pickBook(bi, p);
+      const seq = groups.flatMap(g => g.ps), at = seq.indexOf(p);
+      $("#poem-prev").disabled = at <= 0; $("#poem-next").disabled = at >= seq.length - 1;
+      $("#poem-prev").onclick = () => choose(seq[at - 1]);
+      $("#poem-next").onclick = () => choose(seq[at + 1]);
     }
+    // the poem picker: books as chips, the book's poems as a list, and a search
+    // over titles and verses
+    const norm = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const textOf = new Map([...byPiece].map(([p, rs]) => [p, norm(S.pieces[p][0] + " \n " + rs.map(r => r[6]).join(" \n "))]));
+    function choose(p) { $("#poem").value = p; $("#poem").dispatchEvent(new Event("change")); }
+    let curBook = null;
+    function listHTML(items) {
+      const cur = +$("#poem").value;
+      return items.length ? items.map(({ p, sub }) => `<li><button data-p="${p}" aria-current="${p === cur}">${esc(S.pieces[p][0])}${sub ? `<small>${sub}</small>` : ""}</button></li>`).join("")
+        : `<li class="empty">Ningún poema coincide.</li>`;
+    }
+    function pickBook(bi, p) {
+      if ($("#poem-q").value.trim()) return;
+      curBook = bi;
+      $("#poem-books").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", +c.dataset.b === bi));
+      const pressed = $("#poem-books").querySelector('[aria-pressed="true"]');
+      if (pressed) $("#poem-books").scrollLeft = pressed.offsetLeft - $("#poem-books").offsetLeft - 8;
+      const g = groups.find(x => x.bi === bi);
+      $("#poem-list").innerHTML = listHTML((g ? g.ps : []).map(q => ({ p: q })));
+      const cur = $("#poem-list").querySelector('[aria-current="true"]');
+      if (cur) $("#poem-list").scrollTop = cur.offsetTop - $("#poem-list").clientHeight / 2;
+    }
+    $("#poem-books").innerHTML = groups.map(g => `<button class="chip" data-b="${g.bi}">${esc(g.b.short)}${g.b.year ? ` <small>${g.b.year}</small>` : ""}</button>`).join("");
+    $("#poem-books").addEventListener("click", e => { const c = e.target.closest(".chip"); if (!c) return; $("#poem-q").value = ""; pickBook(+c.dataset.b); });
+    $("#poem-list").addEventListener("click", e => { const b = e.target.closest("button[data-p]"); if (b) choose(+b.dataset.p); });
+    $("#poem-q").addEventListener("input", () => {
+      const q = norm($("#poem-q").value.trim());
+      if (!q) { pickBook(curBook ?? S.pieces[+$("#poem").value][1], +$("#poem").value); return; }
+      $("#poem-books").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", "false"));
+      const hits = [];
+      for (const g of groups) for (const p of g.ps) {
+        const t = textOf.get(p), i = t.indexOf(q);
+        if (i < 0) continue;
+        const inTitle = norm(S.pieces[p][0]).includes(q);
+        const line = inTitle ? "" : (byPiece.get(p).find(r => norm(r[6]).includes(q)) || [])[6];
+        hits.push({ p, sub: `${esc(g.b.short)}${line ? " · «" + esc(line) + "»" : ""}`, rank: inTitle ? 0 : 1 });
+      }
+      hits.sort((a, b) => a.rank - b.rank);
+      $("#poem-list").innerHTML = listHTML(hits.slice(0, 80));
+    });
     $("#poem").addEventListener("change", e => showPoem(+e.target.value));
     const sonatina = S.pieces.findIndex(p => p[0] === "Sonatina");
     const start = byPiece.has(sonatina) ? sonatina : [...byPiece.keys()][0];
@@ -1722,40 +1840,69 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     try { topo = await fetch("land-110m.json").then(r => r.json()); } catch { return; }
     const [sx, sy] = topo.transform.scale, [tx, ty] = topo.transform.translate;
     const arcs = topo.arcs.map(a => { let x = 0, y = 0; return a.map(([dx, dy]) => { x += dx; y += dy; return [x * sx + tx, y * sy + ty]; }); });
-    const LON0 = -130, LON1 = 150, LAT0 = -50, LAT1 = 68, MW = 900;
-    const MH = MW * (LAT1 - LAT0) / (LON1 - LON0);
-    const px = lon => (lon - LON0) / (LON1 - LON0) * MW, py = lat => (LAT1 - lat) / (LAT1 - LAT0) * MH;
+    const VIEWS = [
+      { id: "mundo", label: "Mundo", lon: [-125, 150], lat: [-56, 72] },
+      { id: "america", label: "América", lon: [-125, -30], lat: [-56, 45] },
+      { id: "europa", label: "Europa y Mediterráneo", lon: [-12, 52], lat: [22, 58] },
+    ];
     const ring = idx => idx.flatMap((i, k) => { const a = i >= 0 ? arcs[i] : arcs[~i].slice().reverse(); return k ? a.slice(1) : a; });
-    let d = "";
+    const rings = [];
     topo.objects.land.geometries.forEach(g => (g.type === "MultiPolygon" ? g.arcs : [g.arcs]).forEach(poly => poly.forEach(r => {
-      const pts = ring(r); const lons = pts.map(p => p[0]);
-      if (Math.max(...lons) - Math.min(...lons) > 300) return;
-      d += "M" + pts.map(([lo, la]) => px(lo).toFixed(1) + " " + py(la).toFixed(1)).join("L") + "Z";
+      let pts = ring(r);
+      const lons = pts.map(p => p[0]);
+      // Eurasia crosses the 180° meridian (Chukotka): unwrap it instead of
+      // dropping it, so the continent is drawn whole
+      if (Math.max(...pts.map(p => p[1])) < -60) return;          // Antarctica
+      if (Math.max(...lons) - Math.min(...lons) > 300) pts = pts.map(([lo, la]) => [lo < -100 ? lo + 360 : lo, la]);
+      rings.push(pts);
     })));
     const places = RF.entities.filter(e => e.coords).sort((a, b) => b.n - a.n);
-    let msvg = `<svg viewBox="0 0 ${MW} ${MH.toFixed(0)}" role="img" aria-label="Mapa de los lugares nombrados"><path class="land" d="${d}"/>`;
-    places.slice().reverse().forEach(e => {
-      msvg += `<circle data-n="${esc(e.name)}" cx="${px(e.coords[1]).toFixed(1)}" cy="${py(e.coords[0]).toFixed(1)}" r="${(3 + Math.sqrt(e.n) * 2.6).toFixed(1)}"/>`;
-    });
-    const boxes = [];
-    places.forEach(e => {
-      const x = px(e.coords[1]), y = py(e.coords[0]), r = 3 + Math.sqrt(e.n) * 2.6, w = 6.2 * e.name.length + 8, h = 13;
-      for (const [bx, by, anchor] of [[x + r + 3, y - h / 2, "start"], [x - r - 3 - w, y - h / 2, "start"], [x - w / 2, y - r - h - 1, "start"], [x - w / 2, y + r + 1, "start"]]) {
-        if (bx < 0 || bx + w > MW) continue;
-        if (!boxes.some(([ox, oy, ow, oh]) => bx < ox + ow && ox < bx + w && by < oy + oh && oy < by + h)) {
-          boxes.push([bx, by, w, h]);
-          msvg += `<text x="${bx.toFixed(1)}" y="${(by + h - 3).toFixed(1)}">${esc(e.name)}</text>`;
-          break;
+    const MW = 900;
+    function drawMap(v) {
+      $("#map-tabs").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.v === v.id));
+      const [LON0, LON1] = v.lon, [LAT0, LAT1] = v.lat;
+      // equirectangular, with the horizontal scale shrunk by cos(mid-latitude)
+      // so that zoomed regions keep their shapes
+      const k = Math.cos((LAT0 + LAT1) / 2 * Math.PI / 180);
+      const MH = MW * (LAT1 - LAT0) / ((LON1 - LON0) * k);
+      const px = lon => (lon - LON0) / (LON1 - LON0) * MW, py = lat => (LAT1 - lat) / (LAT1 - LAT0) * MH;
+      const zoom = v.id === "mundo" ? 1 : 1.25;
+      const rad = e => (3 + Math.sqrt(e.n) * 2.6) * zoom;
+      let d = "";
+      rings.forEach(pts => { d += "M" + pts.map(([lo, la]) => px(lo).toFixed(1) + " " + py(la).toFixed(1)).join("L") + "Z"; });
+      const inView = e => { const x = px(e.coords[1]), y = py(e.coords[0]); return x >= 0 && x <= MW && y >= 0 && y <= MH; };
+      const shown = places.filter(inView);
+      let msvg = `<svg viewBox="0 0 ${MW} ${MH.toFixed(0)}" role="img" aria-label="Mapa de los lugares nombrados: ${esc(v.label)}"><path class="land" d="${d}"/>`;
+      shown.slice().reverse().forEach(e => {
+        msvg += `<circle data-n="${esc(e.name)}" cx="${px(e.coords[1]).toFixed(1)}" cy="${py(e.coords[0]).toFixed(1)}" r="${rad(e).toFixed(1)}"/>`;
+      });
+      // labels, largest places first; a label is dropped if it would overlap
+      // another label (the name is still in the tooltip)
+      const boxes = [];
+      let labels = "";
+      shown.forEach(e => {
+        const x = px(e.coords[1]), y = py(e.coords[0]), r = rad(e), w = 6.2 * e.name.length + 6, h = 13;
+        for (const [bx, by] of [[x + r + 3, y - h / 2], [x - r - 3 - w, y - h / 2], [x - w / 2, y - r - h - 1], [x - w / 2, y + r + 1]]) {
+          if (bx < 0 || bx + w > MW || by < 0 || by + h > MH) continue;
+          if (!boxes.some(([ox, oy, ow, oh]) => bx < ox + ow && ox < bx + w && by < oy + oh && oy < by + h)) {
+            boxes.push([bx, by, w, h]);
+            const t = `x="${bx.toFixed(1)}" y="${(by + h - 3).toFixed(1)}"`;
+            labels += `<text class="halo" ${t}>${esc(e.name)}</text><text ${t}>${esc(e.name)}</text>`;
+            break;
+          }
         }
-      }
-    });
-    $("#map").innerHTML = msvg + "</svg>";
-    $("#map").querySelectorAll("circle").forEach(c => {
-      const e = ent.get(c.dataset.n);
-      c.dataset.tipped = ""; onTip(c, ev => showTip(tipFor(e), ev));
-      offTip(c);
-      c.addEventListener("click", () => openWord(query(e)));
-    });
+      });
+      $("#map").innerHTML = msvg + labels + "</svg>";
+      $("#map").querySelectorAll("circle").forEach(c => {
+        const e = ent.get(c.dataset.n);
+        c.dataset.tipped = ""; onTip(c, ev => showTip(tipFor(e), ev));
+        offTip(c);
+        c.addEventListener("click", () => openWord(query(e)));
+      });
+    }
+    $("#map-tabs").innerHTML = VIEWS.map(v => `<button class="chip" data-v="${v.id}">${v.label}</button>`).join("");
+    $("#map-tabs").querySelectorAll(".chip").forEach(c => c.onclick = () => drawMap(VIEWS.find(v => v.id === c.dataset.v)));
+    drawMap(VIEWS[0]);
   })();
 
 
