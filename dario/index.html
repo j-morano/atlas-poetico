@@ -258,6 +258,24 @@ footer h3 { margin: 0; font-family: var(--display); font-size: 22px; color: var(
 .scan .rh { font-family: var(--display); font-style: italic; font-size: 18px; color: var(--oro); text-align: center; }
 .scan .rh.c { font-weight: 600; }
 .scan .rh.a { opacity: .75; }
+.scan .lic { display: block; font-family: var(--text); font-size: 12px; line-height: 1.4; color: var(--muted); margin-top: 1px; }
+.scan .syl.irr { color: var(--c2); }
+mark { background: var(--oro-wash); color: inherit; border-radius: 3px; padding: 0 2px; }
+.lic-words { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 18px 24px; }
+.lic-words h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.lic-words h4 i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.lic-words ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.lic-words button { all: unset; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; width: 100%; box-sizing: border-box; padding: 5px 8px; border-radius: 8px; font-size: 14px; }
+.lic-words button:hover, .lic-words button[aria-pressed="true"] { background: var(--oro-wash); }
+.lic-words button:focus-visible { outline: 2px solid var(--azul); }
+.lic-words .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+.lic-ex { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.lic-ex li { padding: 9px 2px; border-bottom: 1px solid var(--line); display: grid; gap: 2px; }
+.lic-ex .v { font-family: var(--display); font-size: 19px; line-height: 1.3; overflow-wrap: anywhere; }
+.lic-ex .m { font-size: 12.5px; color: var(--muted); }
+.lic-ex .m button { all: unset; cursor: pointer; color: var(--azul); }
+.lic-ex .m button:focus-visible { outline: 2px solid var(--azul); border-radius: 4px; }
+.lic-count { font-size: 13px; color: var(--ink-2); }
 
 /* Paleta */
 .palette { display: grid; gap: 10px; }
@@ -596,7 +614,7 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     <div class="sec-head">
       <div class="eyebrow">Verso · Métrica</div>
       <h2>Medir el verso</h2>
-      <p>Cada verso se ha medido en sílabas métricas, con sinalefas y la regla del acento final (una sílaba más si termina en aguda, una menos si en esdrújula). También se marcan sus acentos y su rima. Los versos compuestos (alejandrinos 7+7, dodecasílabos 6+6) se miden por hemistiquios, como hace un métrico: cada mitad por separado y sin sinalefa en la cesura. La escansión es automática (Rantanplan) y está validada: acierta el número de sílabas en el 99,3 % de una muestra de 2.000 versos de sonetos del Siglo de Oro revisados a mano por especialistas, y en el 98,7 % de 600 versos de poemas isométricos de Darío (97,7 % en los alejandrinos).</p>
+      <p>Cada verso se ha medido en sílabas métricas, con sinalefas y la regla del acento final (una sílaba más si termina en aguda, una menos si en esdrújula). También se marcan sus acentos y su rima. Los versos compuestos (alejandrinos 7+7, dodecasílabos 6+6) se miden por hemistiquios, como hace un métrico: cada mitad por separado y sin sinalefa en la cesura. Sinéresis, dialefas y diéresis se aplican solo cuando la medida del poema las pide (véase Licencias). La escansión es automática y está validada: acierta el número de sílabas en el 99,8 % de una muestra de 2.000 versos de sonetos del Siglo de Oro revisados a mano por especialistas, y en los 600 versos de una muestra de poemas isométricos de Darío.</p>
     </div>
 
     <div class="sub" data-slug="medidas">
@@ -643,6 +661,33 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
         <span class="scan-meta" id="scan-meta"></span>
       </div>
       <div class="panel"><ul class="scan" id="scan"></ul></div>
+  </section>
+
+  <section id="licencias" class="view" hidden>
+    <div class="sec-head">
+      <div class="eyebrow">Verso · Licencias</div>
+      <h2>Las licencias del verso</h2>
+      <p>Para que un verso tenga la medida que pide el poema, el poeta puede juntar o separar vocales: la <b>sinéresis</b> une en una sílaba dos vocales de una palabra (<i>poe-sí-a</i>), la <b>dialefa</b> separa las de dos palabras que normalmente se unirían (<i>de | oro</i>) y la <b>diéresis</b> parte un diptongo (<i>su-a-ve</i>). Cada verso se lee primero con su pronunciación natural: sinalefa entre palabras, hiato entre dos vocales fuertes de una palabra (<i>po-e-ta</i>) y diptongos enteros. Solo cuando esa lectura no da la medida del poema se busca la combinación de licencias más natural que sí la da: la dialefa es más fácil junto a una vocal acentuada o tras una pausa, la sinéresis entre vocales átonas, y la diéresis es la más rara, salvo en grafías de la época como <i>oir</i> o <i>reir</i>. La medida del poema se deduce de sus propios versos y, en las estrofas que repiten una forma (7-7-11…), de la posición de cada verso. Los versos que ninguna lectura razonable ajusta se marcan como irregulares, y los poemas sin medida dominante (verso libre) se leen sin licencias.</p>
+    </div>
+    <div class="sub" data-slug="por-libro">
+      <h3>Las licencias de cada libro</h3>
+      <p id="lic-intro"></p>
+      <div class="keys" id="lic-keys"></div>
+      <div class="panel stacks" id="lic-books"></div>
+    </div>
+    <div class="sub" data-slug="palabras">
+      <h3>Dónde las usa</h3>
+      <p>Las palabras, y los encuentros de palabras, que más veces piden una licencia. Pulsa una para leer sus versos.</p>
+      <div class="panel lic-words" id="lic-words"></div>
+    </div>
+    <div class="sub" data-slug="versos">
+      <h3>Los versos</h3>
+      <p>Cada verso con alguna licencia, con la palabra marcada. Pulsa el título para ver el poema entero medido.</p>
+      <div class="chips" id="lic-filter" role="group" aria-label="Tipo de licencia"></div>
+      <p class="lic-count" id="lic-count" aria-live="polite"></p>
+      <ul class="lic-ex" id="lic-ex"></ul>
+      <div><button class="chip" id="lic-more">Mostrar más</button></div>
+    </div>
   </section>
 
   <section id="paleta" class="view" hidden>
@@ -764,7 +809,7 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     <p>Las rarezas se miden frente a Google Books Ngram (español, versión de 2020): frecuencias de 1880–1920 para la época de Darío y de 2000–2019 para hoy, de la misma fuente. Los libros del siglo XIX se digitalizaron por OCR, así que las palabras muy raras pueden llevar algo de ruido.</p>
     <p>El mapa semántico usa el modelo BAAI/bge-m3: cada pieza se divide en fragmentos de unas 120 palabras, se promedian sus vectores y se resta la media del corpus (sin ese centrado, las piezas largas quedaban cerca de todo). Se eligió entre tres modelos con una prueba de validez: las series que Darío compuso como unidad (El año lírico, los Medallones, Los cisnes, las Rimas, los Abrojos) deben quedar juntas. bge-m3 las recupera unas 3,5 veces mejor que el azar. Las regiones salen de un agrupamiento de consenso (k-means sobre UMAP en 30 ejecuciones); la confianza de cada pieza es la proporción de ejecuciones en que coincide con su región. La región «Sátira y vida humilde» reúne sobre todo los Abrojos, y su brevedad probablemente pesa tanto como su tema.</p>
     <p>El contorno del mapa es de Natural Earth (dominio público), vía el paquete world-atlas.</p>
-    <p>La métrica y la rima se han calculado con Rantanplan (proyecto POSTDATA, LINHD-UNED). Antes de medir, las rayas (—) se sustituyen por espacios, porque una raya pegada a dos palabras («princesa,—dice») hacía que se perdieran ambas; las elisiones se escriben enteras (d'ella → de ella, que mide igual por sinalefa), y las dedicatorias impresas al comienzo de un poema no se miden. Los alejandrinos y dodecasílabos se miden por hemistiquios: se prueba cada límite de palabra como cesura y se acepta solo si las dos mitades miden exactamente 7+7 (o 6+6). Validación: 99,3 % de acierto en sílabas (IC 95 %: 98,8–99,6) en 2.000 versos del Corpus de Sonetos del Siglo de Oro revisados a mano (Navarro-Colorado et al., 2016), y 98,7 % (97,4–99,3) en 600 versos de poemas de Darío de metro conocido y uniforme. Se comprueba verso a verso que no falte ninguna palabra: solo quedan 36 versos con alguna sin medir, casi todos en francés. En dos pasajes (12 versos) no pudo analizarse la rima y solo se midió el verso.</p>
+    <p>La métrica y la rima se han calculado con Rantanplan (proyecto POSTDATA, LINHD-UNED). Antes de medir, las rayas (—) se sustituyen por espacios, porque una raya pegada a dos palabras («princesa,—dice») hacía que se perdieran ambas; las elisiones se escriben enteras (d'ella → de ella, que mide igual por sinalefa), y las dedicatorias impresas al comienzo de un poema no se miden. Los alejandrinos y dodecasílabos se miden por hemistiquios: se prueba cada límite de palabra como cesura y se acepta solo si las dos mitades miden exactamente 7+7 (o 6+6). Las licencias se deciden en contexto: cada verso se lee primero con su pronunciación natural (sinalefa entre palabras, hiato entre vocales fuertes dentro de una palabra, diptongos enteros); si no da la medida del poema, se elige la combinación de sinéresis, dialefas y diéresis de menor coste que sí la da, con costes tomados de las descripciones de Navarro Tomás, Quilis y Domínguez Caparrós. La medida del poema es el menor conjunto de medidas (hasta tres) que explica el 80 % de sus versos, y en estrofas que repiten forma, la de cada posición; los poemas sin medida dominante se leen sin licencias. Las citas de otros autores que encabezan algunos poemas (epígrafes) no se cuentan en ningún análisis. Validación: 99,8 % de acierto en sílabas (IC 95 %: 99,5–99,9) en 2.000 versos del Corpus de Sonetos del Siglo de Oro revisados a mano (Navarro-Colorado et al., 2016), y 100 % (99,4–100) en 600 versos de poemas de Darío de metro conocido y uniforme. Como el método usa la medida del poema, estas pruebas no dicen si la licencia elegida es la correcta; para eso hay una muestra de 150 versos con licencia pendiente de revisión manual. Se comprueba verso a verso que no falte ninguna palabra: solo quedan 36 versos con alguna sin medir, casi todos en francés. En dos pasajes (12 versos) no pudo analizarse la rima y solo se midió el verso.</p>
     <p>Los diez libros principales se ordenan por la fecha de su primera edición. <i>Lira póstuma</i> (1919) y <i>Poemas de juventud</i> (1923) son recopilaciones póstumas; <i>Azul</i> es sobre todo prosa.</p>
       <h3 class="lic-h">Fuentes y licencias</h3>
       <p><b>Textos de Rubén Darío.</b> De dominio público (Darío murió en 1916). Proceden del corpus <i>Literatur</i>, que los toma de ediciones de época: Project Gutenberg, Wikisource, Internet Archive, Biblioteca Virtual Miguel de Cervantes y Memoria Chilena.</p>
@@ -791,6 +836,7 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     { id: "zipf", title: "Ley de Zipf", group: "Palabras", find: "Más de la mitad de las formas aparece una sola vez." },
     { id: "metrica", title: "Métrica", group: "Verso", find: "Del octosílabo de Abrojos al alejandrino de Prosas profanas; la rima consonante pasa del 50 al 85 %." },
     { id: "escansion", title: "Escansión de un poema", group: "Verso", find: "Cada verso medido, con sus acentos y su rima." },
+    { id: "licencias", title: "Licencias", group: "Verso", find: "Sinéresis, dialefas y diéresis: cuándo junta o separa vocales para dar la medida." },
     { id: "paleta", title: "Paleta", group: "Imaginario", find: "Oro, blanco y azul; el blanco manda en Prosas profanas. Y un joyero de cristal y perlas." },
     { id: "referencias", title: "Referencias", group: "Imaginario", find: "Venus, Cristo y Víctor Hugo, en red y en un mapa que va del Momotombo a Kioto." },
     { id: "semantico", title: "Mapa semántico", group: "Imaginario", find: "Cuatro regiones temáticas que forman un continuo." },
@@ -1392,6 +1438,7 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
       }));
 
     // poem scansion
+    const LICN = { s: "sinéresis", d: "dialefa", e: "diéresis" };
     const byPiece = new Map();
     M.forEach((r, i) => { if (!byPiece.has(r[0])) byPiece.set(r[0], []); byPiece.get(r[0]).push(r); });
     const groups = books.map((b, bi) => ({ b, bi, ps: [...byPiece.keys()].filter(p => S.pieces[p][1] === bi) })).filter(g => g.ps.length);
@@ -1407,8 +1454,10 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
         const dots = r[3] ? [...r[3]].map(c => `<b class="${c === "+" ? "on" : ""}"></b>`).join("") : "";
         const letter = r[4] && r[4] !== "-" && r[4] !== "?" ? r[4] : "";
         const gap = i > 0 && r[7] !== rows[i - 1][7] ? "gap" : "";
-        return `<li class="${gap}" data-k="${r[1]}:${letter}" data-i="${i}"><span class="syl num">${r[2] ?? "–"}</span>` +
-          `<span class="txt">${esc(r[6])}</span><span class="dots" aria-hidden="true">${dots}</span>` +
+        const lic = (r[8] || []).map(([k, w]) => `${LICN[k]}: ${esc(w)}`).join(" · ");
+        const irr = r[9] ? ` irr" title="Irregular: ninguna lectura razonable da la medida del poema (${esc(r[10])})` : "";
+        return `<li class="${gap}" data-k="${r[1]}:${letter}" data-i="${i}"><span class="syl num${irr}">${r[2] ?? "–"}</span>` +
+          `<span class="txt">${esc(r[6])}${lic ? `<span class="lic">${lic}</span>` : ""}</span><span class="dots" aria-hidden="true">${dots}</span>` +
           `<span class="rh ${r[5]}" title="${r[5] === "c" ? "rima consonante" : r[5] === "a" ? "rima asonante" : ""}">${letter}</span></li>`;
       }).join("");
       const lis = [...$("#scan").children];
@@ -1425,6 +1474,71 @@ details.howto p { margin-top: 6px; color: var(--ink-2); }
     const sonatina = S.pieces.findIndex(p => p[0] === "Sonatina");
     const start = byPiece.has(sonatina) ? sonatina : [...byPiece.keys()][0];
     $("#poem").value = start; showPoem(start);
+
+    // licences
+    const LT = [["s", "sinéresis", "--c1"], ["d", "dialefa", "--c2"], ["e", "diéresis", "--c3"]];
+    const licRows = M.filter(r => r[8] && r[8].length);
+    const metred = M.filter(r => r[10]);
+    const irr = M.filter(r => r[9]).length;
+    const tally = {};
+    licRows.forEach(r => r[8].forEach(([k, w]) => { const key = k + "\t" + w.toLowerCase(); tally[key] = (tally[key] || 0) + 1; }));
+    const byType = k => Object.entries(tally).filter(([key]) => key[0] === k).sort((a, b) => b[1] - a[1]);
+    const nType = k => byType(k).reduce((a, [, c]) => a + c, 0);
+    const topD = byType("d")[0];
+    $("#lic-intro").innerHTML = `${fmt.format(licRows.length)} de los ${fmt.format(metred.length)} versos medidos de poemas con medida regular necesitan alguna licencia (${fmt1.format(100 * licRows.length / metred.length)} %): ` +
+      `${fmt.format(nType("d"))} dialefas, ${fmt.format(nType("s"))} sinéresis y ${fmt.format(nType("e"))} diéresis. ` +
+      (topD ? `La más repetida es la dialefa <i>${esc(topD[0].split("\t")[1])}</i> (${fmt.format(topD[1])} versos). ` : "") +
+      `Otros ${fmt.format(irr)} versos (${fmt1.format(100 * irr / metred.length)} %) quedan irregulares. Las barras reparten las licencias de cada libro; debajo, cuántas hay cada 100 versos.`;
+    stacks($("#lic-books"), $("#lic-keys"), LT.map(([, l, c]) => ({ label: l, color: c })),
+      main.map(b => {
+        const rows = byBook.get(b).filter(r => r[10]);
+        const counts = [0, 0, 0];
+        rows.forEach(r => (r[8] || []).forEach(([k]) => counts["sde".indexOf(k)]++));
+        const tot = counts[0] + counts[1] + counts[2];
+        return { label: `${books[b].short} (${books[b].year})`, sub: `${fmt1.format(rows.length ? 100 * tot / rows.length : 0)} cada 100 versos`, counts, n: rows.length };
+      }).filter(r => r.n >= 100));
+
+    let licType = "", licWord = "", licShown = 30;
+    $("#lic-words").innerHTML = LT.map(([k, l, c]) => `<div><h4><i style="background:var(${c})"></i>${l}</h4><ol>` +
+      byType(k).slice(0, 10).map(([key, n]) => { const w = key.split("\t")[1];
+        return `<li><button data-k="${k}" data-w="${esc(w)}" aria-pressed="false"><span>${esc(w)}</span><span class="n">${fmt.format(n)}</span></button></li>`; }).join("") +
+      "</ol></div>").join("");
+    $("#lic-filter").innerHTML = [["", "Todas"], ...LT.map(([k, l]) => [k, l[0].toUpperCase() + l.slice(1)])]
+      .map(([k, l]) => `<button class="chip" data-k="${k}">${l}</button>`).join("");
+    const reEsc = t => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    function mark(text, words) {
+      let html = esc(text);
+      words.forEach(w => {
+        const parts = w.split(" | ").map(x => reEsc(esc(x)));
+        const re = new RegExp(`(^|[^\\p{L}])(${parts.join("[^\\p{L}]+")})(?![\\p{L}])`, "iu");
+        html = html.replace(re, (m0, a, b) => `${a}<mark>${b}</mark>`);
+      });
+      return html;
+    }
+    function showLic() {
+      $("#lic-filter").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.k === licType && !licWord));
+      $("#lic-words").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.k === licType && b.dataset.w === licWord));
+      const hits = licRows.filter(r => r[8].some(([k, w]) => (!licType || k === licType) && (!licWord || w.toLowerCase() === licWord)));
+      $("#lic-count").textContent = `${fmt.format(hits.length)} versos` + (licWord ? ` con «${licWord}»` : licType ? ` con ${LICN[licType]}` : "");
+      $("#lic-ex").innerHTML = hits.slice(0, licShown).map(r => {
+        const ws = r[8].filter(([k]) => !licType || k === licType).map(([, w]) => w);
+        const piece = S.pieces[r[0]], b = books[piece[1]];
+        return `<li><span class="v">${mark(r[6], ws)}</span><span class="m">${r[8].map(([k, w]) => `${LICN[k]}: ${esc(w)}`).join(" · ")} · ${r[2]} sílabas · ` +
+          `<button data-p="${r[0]}">${esc(piece[0])}</button>, <i>${esc(b.short)}</i></span></li>`;
+      }).join("");
+      $("#lic-more").hidden = hits.length <= licShown;
+      $("#lic-ex").querySelectorAll("button[data-p]").forEach(bt => bt.onclick = () => {
+        $("#poem").value = bt.dataset.p; $("#poem").dispatchEvent(new Event("change")); window.atlasGo("escansion");
+      });
+    }
+    $("#lic-filter").addEventListener("click", e => { const c = e.target.closest(".chip"); if (!c) return; licType = c.dataset.k; licWord = ""; licShown = 30; showLic(); });
+    $("#lic-words").addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b) return;
+      licType = b.dataset.k; licWord = b.dataset.w; licShown = 30; showLic();
+      window.atlasGo("licencias-versos");
+    });
+    $("#lic-more").onclick = () => { licShown += 30; showLic(); };
+    showLic();
   })();
 
 
